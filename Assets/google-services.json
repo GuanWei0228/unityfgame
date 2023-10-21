@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "297391283977",
+    "firebase_url": "https://questionandanswer-cf1cd-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "questionandanswer-cf1cd",
+    "storage_bucket": "questionandanswer-cf1cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297391283977:android:c7c53bf55143a1df37bdd8",
+        "android_client_info": {
+          "package_name": "com.s1092790.eenglish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297391283977-oklqpck9hudcfev9kse4llv6v86l2mma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAVlqu6Dm0o8ByfecSYhyMx6tssyI9YiQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297391283977-oklqpck9hudcfev9kse4llv6v86l2mma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
