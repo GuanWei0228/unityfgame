@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +30,10 @@ public class BattleSystem : MonoBehaviour
     int currentMove;
     int currentBack;
 
+    public string answer;
+    public bool selectanswer;
+    string selectedMoveText;
+
     public void StartBattle()
     {
         StartCoroutine(SetupBattle());
@@ -46,43 +50,50 @@ public class BattleSystem : MonoBehaviour
         dialogBox.SetMoveNames(playerUnit.Pokemon.Moves);
 
         //yield return dialogBox.TypeDialog($"A wild {enemyUnit.Pokemon.Base.Name} appeared.");
-        yield return dialogBox.TypeDialog($"�J���Ǫ�!");
-        yield return new WaitForSeconds(1f);
+        yield return dialogBox.TypeDialog($"遇見怪物!");
+        yield return new WaitForSeconds(2f);
 
         PlayerAction();
     }
 
     void PlayerAction()
     {
-       
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
         //rann = UnityEngine.Random.Range(1, 5).ToString();
         state = BattleState.PlayerAction;
 
         //dialogBox.TypeDialog("");
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
-        {
-            FirebaseApp app = FirebaseApp.DefaultInstance;
-            reference = FirebaseDatabase.DefaultInstance.RootReference;
 
-            reference.Child("QAQ").Child("Q").Child(rann).GetValueAsync().ContinueWithOnMainThread(task => {
-                if (task.IsFaulted)
-                {
-                    // Handle the error...
-                }
-                if (task.IsCompletedSuccessfully)
-                {
-                    DataSnapshot snapshot = task.Result;
-                    string dialogMessage = snapshot.Value.ToString();
-
-                    string[] lines = dialogMessage.Split('\n');
-
-                    StartCoroutine(ShowDialogLines(lines));
-                    //StartCoroutine(dialogBox.TypeDialog(dialogMessage));
-                    //dialogBox.EnableActionSelector(true);
-                }
-            });
-
+        reference.Child("QAQ").Child("Ans").Child(rann).GetValueAsync().ContinueWithOnMainThread(task => {
+            if (task.IsFaulted)
+            {
+                // Handle the error...
+            }
+            if (task.IsCompletedSuccessfully)
+            {
+                DataSnapshot snapshot = task.Result;
+                answer = snapshot.Value.ToString();
+            }
         });
+
+        reference.Child("QAQ").Child("Q").Child(rann).GetValueAsync().ContinueWithOnMainThread(task => {
+            if (task.IsFaulted)
+            {
+                // Handle the error...
+            }
+            if (task.IsCompletedSuccessfully)
+            {
+                DataSnapshot snapshot = task.Result;
+                string dialogMessage = snapshot.Value.ToString();
+
+                string[] lines = dialogMessage.Split('\n');
+
+                StartCoroutine(ShowDialogLines(lines));
+                //StartCoroutine(dialogBox.TypeDialog(dialogMessage));
+                //dialogBox.EnableActionSelector(true);
+            }
+        });
+
         
 
     }
@@ -120,7 +131,7 @@ public class BattleSystem : MonoBehaviour
 
         var move = playerUnit.Pokemon.Moves[currentMove];
         //yield return dialogBox.TypeDialog($"{playerUnit.Pokemon.Base.Name} used {move.Base.Name}");
-        yield return dialogBox.TypeDialog("����A�i������I");
+        yield return dialogBox.TypeDialog("答對，進行攻擊！");
         yield return new WaitForSeconds(1f);
 
         bool isFainted = enemyUnit.Pokemon.EnemyTakeDamage(move, playerUnit.Pokemon);
@@ -129,7 +140,7 @@ public class BattleSystem : MonoBehaviour
         if (isFainted)
         {
             //yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name} Fainted");
-            yield return dialogBox.TypeDialog("���˩��~�I");
+            yield return dialogBox.TypeDialog("擊倒怪獸！");
             yield return new WaitForSeconds(2f);
             OnBattleOver(true);
         }
@@ -145,7 +156,7 @@ public class BattleSystem : MonoBehaviour
 
         var move = enemyUnit.Pokemon.GetRandomMove();
         //yield return dialogBox.TypeDialog($"{playerUnit.Pokemon.Base.Name} used {move.Base.Name}");
-        yield return dialogBox.TypeDialog("�Ǫ�����");
+        yield return dialogBox.TypeDialog("怪物攻擊");
         yield return new WaitForSeconds(1f);
 
         bool isFainted = playerUnit.Pokemon.MeTakeDamage(move, playerUnit.Pokemon);
@@ -153,7 +164,7 @@ public class BattleSystem : MonoBehaviour
 
         if (isFainted)
         {
-            yield return dialogBox.TypeDialog("�A��F");
+            yield return dialogBox.TypeDialog("你輸了");
             yield return new WaitForSeconds(2f);
             OnBattleOver(false);
         }
@@ -226,7 +237,6 @@ public class BattleSystem : MonoBehaviour
             if (currentMove > 1)
                 currentMove -= 2;
         }
-
         dialogBox.UpdateMoveSelection(currentMove, playerUnit.Pokemon.Moves[currentMove]);
 
         if (Input.GetKeyDown(KeyCode.Z))
@@ -234,16 +244,25 @@ public class BattleSystem : MonoBehaviour
             sel = currentMove;
             dialogBox.EnableMoveSelector(false);
             dialogBox.EnableDialogText(true);
+
+            // 获取选择的招式的文本信息
+            Text selectedMoveTextObject = dialogBox.MoveTexts[sel];
+            string selectedMoveText = selectedMoveTextObject.text;
+
+            // 在这里使用 selectedMoveText，你可以将其存储、打印或进行其他操作
+             print(answer);
+            Debug.Log("Selected Move Text: " + selectedMoveText);
+            if (answer == selectedMoveText)
+            {
+                selectanswer = true;
+            }
+            else
+            {
+                selectanswer = false;
+            }
+            print("boo1" + selectanswer);
             StartCoroutine(PerformPlayerMove());
         }
-
-        /*if (Input.GetKeyDown(KeyCode.X))
-        {
-            sel = currentMove;
-            dialogBox.EnableMoveSelector(false);
-            dialogBox.EnableDialogText(true);
-            PlayerAction();
-        }*/
     }
 
     void HandleBackSelection()

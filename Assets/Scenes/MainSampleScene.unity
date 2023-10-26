@@ -1512,7 +1512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _base: {fileID: 11400000, guid: ad468d452a7881c41a7fddbb0ba07c70, type: 2}
-  level: 5
+  level: 3
   isPlayerUnit: 0
 --- !u!1 &941213617
 GameObject:
@@ -2044,7 +2044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _base: {fileID: 11400000, guid: e3fca73a6335944478d13635cf1043c4, type: 2}
-  level: 7
+  level: 100
   isPlayerUnit: 1
 --- !u!1 &1098887568
 GameObject:
@@ -3683,6 +3683,8 @@ MonoBehaviour:
   dialogBox: {fileID: 2048021495}
   rann: 1
   sel: 0
+  answer: 
+  selectanswer: 0
 --- !u!4 &2029895965
 Transform:
   m_ObjectHideFlags: 0

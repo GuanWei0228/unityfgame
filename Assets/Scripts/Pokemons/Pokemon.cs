@@ -62,8 +62,37 @@ public class Pokemon : MonoBehaviour
         get{return Mathf.FloorToInt((Base.Speed * Level) / 100f)+10;}
     }
 
+    public bool EnemyTakeDamage(Move move, Pokemon attacker)
+    {
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        float modifiers = Random.Range(0.85f, 1f);
+        float a = (2 * attacker.Level + 10) / 250f;
+        float d = a * move.Base.Power * ((float)attacker.Attack / Defense) + 2;
+        int damage = Mathf.FloorToInt(d * modifiers);
 
-    public bool EnemyTakeDamage(Move move,Pokemon attacker)
+        BattleSystem battleSystem = FindObjectOfType<BattleSystem>();
+        bool answer = battleSystem.selectanswer;
+
+        print("ans: " + answer);
+        if (answer)
+        {
+            HP -= damage;
+        }
+        else
+        {
+            print("沒料");
+        }
+
+        if (HP <= 0)
+        {
+            HP = 0;
+            return true;
+        }
+
+        return false;
+    }
+
+    /*public bool EnemyTakeDamage(Move move,Pokemon attacker)
     {
         
         BattleSystem battleSystem = FindObjectOfType<BattleSystem>();
@@ -82,9 +111,6 @@ public class Pokemon : MonoBehaviour
         {
             FirebaseApp app = FirebaseApp.DefaultInstance;
             reference = FirebaseDatabase.DefaultInstance.RootReference;
-            
-            string answer = string.Empty;
-            string select = string.Empty;
 
 
             // 比對邏輯
@@ -150,9 +176,9 @@ public class Pokemon : MonoBehaviour
         }
 
         return false;
-    }
+    }*/
 
-   
+
 
 
 
@@ -164,7 +190,7 @@ public class Pokemon : MonoBehaviour
         float d = a * move.Base.Power * ((float)attacker.Attack / Defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
 
-        //HP -= damage;
+        HP -= damage;
         if (HP <= 0)
         {
             HP = 0;

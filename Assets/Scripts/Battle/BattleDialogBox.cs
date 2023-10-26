@@ -23,6 +23,7 @@ public class BattleDialogBox : MonoBehaviour
     [SerializeField] List<Text> actionTexts;
     [SerializeField] List<Text> backTexts;
     [SerializeField] List<Text> moveTexts;
+    public List<Text> MoveTexts => moveTexts;
 
 
     [SerializeField] Text ppText;
