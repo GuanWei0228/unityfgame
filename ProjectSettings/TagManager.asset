@@ -4,10 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - tp
   - Monster
   - BossRoom
   - BasicRoom
+  - Door
   layers:
   - Default
   - TransparentFX

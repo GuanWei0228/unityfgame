@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6570545746097596769}
   m_Layer: 0
   m_Name: Door_right
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2162,7 +2162,7 @@ GameObject:
   - component: {fileID: 7214963929658071143}
   m_Layer: 0
   m_Name: Door_down
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2246,7 +2246,7 @@ GameObject:
   - component: {fileID: 6217643712185569669}
   m_Layer: 0
   m_Name: Door_up
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2328,6 +2328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7846873980897732283}
   - component: {fileID: 8918990223251870782}
+  - component: {fileID: 5072455573351882438}
   m_Layer: 6
   m_Name: RoomArea
   m_TagString: Untagged
@@ -2396,6 +2397,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9157078, y: 0.81149566}
   m_EdgeRadius: 0
+--- !u!114 &5072455573351882438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300207433298334358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a0115b0f857c914690f335e0849c48b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterPrefabs:
+  - {fileID: 6802334933713924980, guid: f1c83a8265549ff478d87bd8b74c71b0, type: 3}
+  spawnPoint: {fileID: 4870281072760598328}
+  yourMaxValue: 1
 --- !u!1 &4929789701845472523
 GameObject:
   m_ObjectHideFlags: 0
@@ -2808,7 +2825,7 @@ GameObject:
   - component: {fileID: 8008664187498665861}
   m_Layer: 0
   m_Name: Door_left
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
