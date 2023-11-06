@@ -110,6 +110,16 @@ public class RoomGenerator : MonoBehaviour
 
     }
 
+    public void mapOpen()
+    {
+        map = !map;
+        if (map)
+            Map.SetActive(false);
+        else
+            Map.SetActive(true);
+
+    }
+
     public void ChangePointPos()
     {
         do

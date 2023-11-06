@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("speed", movement.magnitude);    
     }
 
-    void OnCollisionEnter2D(Collision2D other)  //other是指碰撞到的東西 
+    /*void OnCollisionEnter2D(Collision2D other)  //other是指碰撞到的東西 
     {
         if (other.gameObject.tag == "Monster")
         {
@@ -49,5 +49,5 @@ public class PlayerController : MonoBehaviour
         }
 
 
-    }
+    }*/
 }
