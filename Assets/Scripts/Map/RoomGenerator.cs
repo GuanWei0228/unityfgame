@@ -145,11 +145,10 @@ public class RoomGenerator : MonoBehaviour
 
     public void SetupRoom(Room newRoom, Vector3 roomPosition)
     {
-        newRoom.roomRight = IfPositionCreated(roomPosition + new Vector3(xOffset, 0, 0));
-        newRoom.roomLeft = IfPositionCreated(roomPosition + new Vector3(-xOffset, 0, 0));
-        newRoom.roomUp = IfPositionCreated(roomPosition + new Vector3(0, yOffset, 0));
-        newRoom.roomDown = IfPositionCreated(roomPosition + new Vector3(0, -yOffset, 0));
-
+        newRoom.roomUp = Physics2D.OverlapCircle(roomPosition + new Vector3(0, yOffset, 0), 0.2f, roomLayer);
+        newRoom.roomDown = Physics2D.OverlapCircle(roomPosition + new Vector3(0, -yOffset, 0), 0.2f, roomLayer);
+        newRoom.roomLeft = Physics2D.OverlapCircle(roomPosition + new Vector3(-xOffset, 0, 0), 0.2f, roomLayer);
+        newRoom.roomRight = Physics2D.OverlapCircle(roomPosition + new Vector3(xOffset, 0, 0), 0.2f, roomLayer);
 
         newRoom.UpdateRoom(xOffset, yOffset);
 
