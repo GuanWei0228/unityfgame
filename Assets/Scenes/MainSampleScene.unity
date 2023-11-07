@@ -2563,6 +2563,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 941213621}
   battleSystem: {fileID: 2029895964}
+  joyStick: {fileID: 2023062008}
+  virtualJoystick: {fileID: 1555083872}
+  map: {fileID: 1439961120}
   worldCamera: {fileID: 519420031}
 --- !u!4 &1255254680
 Transform:
@@ -2978,10 +2981,10 @@ RectTransform:
   - {fileID: 685163116}
   m_Father: {fileID: 2023062009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -446.16376, y: -195.16376}
-  m_SizeDelta: {x: 193.6725, y: 193.6725}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 193.83624, y: 164.83624}
+  m_SizeDelta: {x: 193.67249, y: 193.67249}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1555083872
 MonoBehaviour:

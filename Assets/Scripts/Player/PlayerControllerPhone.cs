@@ -6,7 +6,7 @@ public class PlayerControllerPhone : MonoBehaviour
     Rigidbody2D rb;
     VirtualJoystick joystick;
     Animator anim;
-    public event Action OnEncountered;
+    //public event Action OnEncountered;
     public float speed;
     Vector2 movement;
 
@@ -49,11 +49,11 @@ public class PlayerControllerPhone : MonoBehaviour
         anim.SetFloat("speed", movement.magnitude);
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    /*void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Monster")
         {
             OnEncountered();
         }
-    }
+    }*/
 }

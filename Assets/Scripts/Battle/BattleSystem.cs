@@ -131,7 +131,13 @@ public class BattleSystem : MonoBehaviour
 
         var move = playerUnit.Pokemon.Moves[currentMove];
         //yield return dialogBox.TypeDialog($"{playerUnit.Pokemon.Base.Name} used {move.Base.Name}");
-        yield return dialogBox.TypeDialog("答對，進行攻擊！");
+        if (selectanswer == true)
+        {
+            yield return dialogBox.TypeDialog("答對，進行攻擊！");
+        }
+        else {
+            yield return dialogBox.TypeDialog("答錯了哭哭！");
+        }
         yield return new WaitForSeconds(1f);
 
         bool isFainted = enemyUnit.Pokemon.EnemyTakeDamage(move, playerUnit.Pokemon);

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1381202070916412750}
   - component: {fileID: 19740562678186033}
   - component: {fileID: 6435805007066605175}
-  - component: {fileID: 6134856757953303527}
+  - component: {fileID: 3991655091646862392}
   m_Layer: 0
   m_Name: worm-green
   m_TagString: Monster
@@ -149,7 +149,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.64, y: 0.64}
   m_Direction: 0
---- !u!114 &6134856757953303527
+--- !u!114 &3991655091646862392
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,9 +161,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eac97aad3166d343a8856ff602fd2e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  detectionRange: 3
+  moveSpeed: 1
+  detectionRange: 6
   stoppingDistance: 1
-  followDelay: 2
+  followDelay: 0
   playerTransform: {fileID: 0}
   initialPosition: {x: 0, y: 0, z: 0}
