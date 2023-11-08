@@ -22,6 +22,8 @@ public class BattleSystem : MonoBehaviour
 
     public event Action<bool> OnBattleOver;
 
+    public event Action OnActionComplete; // 定義一個事件
+
     public string rann;
     public int sel;
 
@@ -98,6 +100,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
+
     public string GetRann()
     {
         return rann;
@@ -106,23 +109,34 @@ public class BattleSystem : MonoBehaviour
     IEnumerator ShowDialogLines(string[] lines)
     {
         int t = 0;
+        int numLines = lines.Length;
         foreach (string line in lines)
         {
             yield return StartCoroutine(dialogBox.TypeDialog(line));
             t++;
         }
-        if (t > 0) {
+        if (t == numLines) {
             dialogBox.EnableActionSelector(true);
         }
-
+        OnActionComplete?.Invoke();
     }
 
-    void PlayerMove()
+    public void PlayerMove()
     {
         state = BattleState.PlayerMove;
         dialogBox.EnableActionSelector(false);
         dialogBox.EnableDialogText(false);
         dialogBox.EnableMoveSelector(true);
+    }
+
+    public void BackSelection()
+    {
+        dialogBox.UpdateBackSelection(currentAction);
+        dialogBox.EnableMoveSelector(false);
+        dialogBox.EnableDialogText(true);
+        PlayerAction();
+
+        
     }
 
     IEnumerator PerformPlayerMove()
@@ -221,6 +235,105 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    public void ButtonSelect1() {
+        sel = 0;
+        dialogBox.EnableMoveSelector(false);
+        dialogBox.EnableDialogText(true);
+
+        // 获取选择的招式的文本信息
+        Text selectedMoveTextObject = dialogBox.MoveTexts[sel];
+        string selectedMoveText = selectedMoveTextObject.text;
+
+        // 在这里使用 selectedMoveText，你可以将其存储、打印或进行其他操作
+        print(answer);
+        Debug.Log("Selected Move Text: " + selectedMoveText);
+        if (answer == selectedMoveText)
+        {
+            selectanswer = true;
+        }
+        else
+        {
+            selectanswer = false;
+        }
+        print("boo1" + selectanswer);
+        StartCoroutine(PerformPlayerMove());
+    }
+
+    public void ButtonSelect2()
+    {
+        sel = 1;
+        dialogBox.EnableMoveSelector(false);
+        dialogBox.EnableDialogText(true);
+
+        // 获取选择的招式的文本信息
+        Text selectedMoveTextObject = dialogBox.MoveTexts[sel];
+        string selectedMoveText = selectedMoveTextObject.text;
+
+        // 在这里使用 selectedMoveText，你可以将其存储、打印或进行其他操作
+        print(answer);
+        Debug.Log("Selected Move Text: " + selectedMoveText);
+        if (answer == selectedMoveText)
+        {
+            selectanswer = true;
+        }
+        else
+        {
+            selectanswer = false;
+        }
+        print("boo1" + selectanswer);
+        StartCoroutine(PerformPlayerMove());
+    }
+
+    public void ButtonSelect3()
+    {
+        sel = 2;
+        dialogBox.EnableMoveSelector(false);
+        dialogBox.EnableDialogText(true);
+
+        // 获取选择的招式的文本信息
+        Text selectedMoveTextObject = dialogBox.MoveTexts[sel];
+        string selectedMoveText = selectedMoveTextObject.text;
+
+        // 在这里使用 selectedMoveText，你可以将其存储、打印或进行其他操作
+        print(answer);
+        Debug.Log("Selected Move Text: " + selectedMoveText);
+        if (answer == selectedMoveText)
+        {
+            selectanswer = true;
+        }
+        else
+        {
+            selectanswer = false;
+        }
+        print("boo1" + selectanswer);
+        StartCoroutine(PerformPlayerMove());
+    }
+
+    public void ButtonSelect4()
+    {
+        sel = 3;
+        dialogBox.EnableMoveSelector(false);
+        dialogBox.EnableDialogText(true);
+
+        // 获取选择的招式的文本信息
+        Text selectedMoveTextObject = dialogBox.MoveTexts[sel];
+        string selectedMoveText = selectedMoveTextObject.text;
+
+        // 在这里使用 selectedMoveText，你可以将其存储、打印或进行其他操作
+        print(answer);
+        Debug.Log("Selected Move Text: " + selectedMoveText);
+        if (answer == selectedMoveText)
+        {
+            selectanswer = true;
+        }
+        else
+        {
+            selectanswer = false;
+        }
+        print("boo1" + selectanswer);
+        StartCoroutine(PerformPlayerMove());
+    }
+
     void HandleMoveSelection()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -270,6 +383,8 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(PerformPlayerMove());
         }
     }
+
+    
 
     void HandleBackSelection()
     {

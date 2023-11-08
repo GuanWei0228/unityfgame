@@ -20,6 +20,11 @@ public class BattleDialogBox : MonoBehaviour
     [SerializeField] GameObject moveSelector;
     [SerializeField] GameObject moveDetails;
 
+    [SerializeField] Button btn1;
+    [SerializeField] Button btn2;
+    [SerializeField] Button btn3;
+    [SerializeField] Button btn4;
+
     [SerializeField] List<Text> actionTexts;
     [SerializeField] List<Text> backTexts;
     [SerializeField] List<Text> moveTexts;
@@ -126,6 +131,9 @@ public class BattleDialogBox : MonoBehaviour
                         string dialogMessage = snapshot.Value.ToString();
                         
                         moveTexts[currentIndex].text = dialogMessage;
+                        
+                        Text buttonText = btn1.GetComponentInChildren<Text>();
+                        buttonText.text = dialogMessage;
                     }
                 });
                 
@@ -143,6 +151,9 @@ public class BattleDialogBox : MonoBehaviour
                         string dialogMessage = snapshot.Value.ToString();
                         
                         moveTexts[currentIndex].text = dialogMessage;
+
+                        Text buttonText = btn2.GetComponentInChildren<Text>();
+                        buttonText.text = dialogMessage;
                     }
                 });
             }
@@ -159,6 +170,9 @@ public class BattleDialogBox : MonoBehaviour
                         string dialogMessage = snapshot.Value.ToString();
                         
                         moveTexts[currentIndex].text = dialogMessage;
+
+                        Text buttonText = btn3.GetComponentInChildren<Text>();
+                        buttonText.text = dialogMessage;
                     }
                 });
             }
@@ -175,6 +189,9 @@ public class BattleDialogBox : MonoBehaviour
                         string dialogMessage = snapshot.Value.ToString();
                         
                         moveTexts[currentIndex].text = dialogMessage;
+
+                        Text buttonText = btn4.GetComponentInChildren<Text>();
+                        buttonText.text = dialogMessage;
                     }
                 });
 
