@@ -24,8 +24,13 @@ public class BattleSystem : MonoBehaviour
 
     public event Action OnActionComplete; // 定義一個事件
 
+    public int maxnumber;
     public string rann;
     public int sel;
+
+    HashSet<string> usedRannSet = new HashSet<string>();//存rann
+    List<string> wonQuestions = new List<string>(); //存正確回答題號
+    List<string> lostQuestions = new List<string>();//存錯誤回答題號
 
     BattleState state;
     int currentAction;
@@ -43,7 +48,24 @@ public class BattleSystem : MonoBehaviour
 
     public IEnumerator SetupBattle()
     {
-        rann = UnityEngine.Random.Range(1, 100).ToString();
+        // 生成新的 rann，確保不重複
+        string newRann;
+
+        if (usedRannSet.Count == maxnumber-1)
+        {
+            // 如果所有數字都已經使用過，重新初始化集合
+            usedRannSet.Clear();
+        }
+        do
+        {
+            newRann = UnityEngine.Random.Range(1, maxnumber+1).ToString();
+        } while (usedRannSet.Contains(newRann));
+
+        // 將新的 rann 加入到使用過的 set 中
+        usedRannSet.Add(newRann);
+
+        rann = newRann;
+
         playerUnit.Setup();
         enemyUnit.Setup();
         playerHud.SetData(playerUnit.Pokemon);
@@ -54,6 +76,7 @@ public class BattleSystem : MonoBehaviour
         //yield return dialogBox.TypeDialog($"A wild {enemyUnit.Pokemon.Base.Name} appeared.");
         yield return dialogBox.TypeDialog($"遇見怪物!");
         yield return new WaitForSeconds(2f);
+        PrintResults(); //輸出wonQuestions lostQuestions
 
         PlayerAction();
     }
@@ -63,7 +86,7 @@ public class BattleSystem : MonoBehaviour
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
         //rann = UnityEngine.Random.Range(1, 5).ToString();
         state = BattleState.PlayerAction;
-
+        
         //dialogBox.TypeDialog("");
 
         reference.Child("QAQ").Child("Ans").Child(rann).GetValueAsync().ContinueWithOnMainThread(task => {
@@ -162,6 +185,7 @@ public class BattleSystem : MonoBehaviour
             //yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name} Fainted");
             yield return dialogBox.TypeDialog("擊倒怪獸！");
             yield return new WaitForSeconds(2f);
+            wonQuestions.Add(rann);
             OnBattleOver(true);
         }
         else
@@ -186,6 +210,7 @@ public class BattleSystem : MonoBehaviour
         {
             yield return dialogBox.TypeDialog("你輸了");
             yield return new WaitForSeconds(2f);
+            lostQuestions.Add(rann);
             OnBattleOver(false);
         }
         else
@@ -194,7 +219,28 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-   
+
+    void PrintResults()
+    {
+        Debug.Log("Won Questions:");
+        foreach (var question in wonQuestions)
+        {
+            print(question);
+        }
+
+        Debug.Log("Lost Questions:");
+        foreach (var question in lostQuestions)
+        {
+            print(question);
+        }
+
+        Debug.Log("Used Rann Set:");
+        foreach (var usedRann in usedRannSet)
+        {
+            print(usedRann);
+        }
+    }
+
     public void HandleUpdate()
     {
         if(state == BattleState.PlayerAction)
@@ -358,7 +404,7 @@ public class BattleSystem : MonoBehaviour
         }
         dialogBox.UpdateMoveSelection(currentMove, playerUnit.Pokemon.Moves[currentMove]);
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z)) //選擇選項
         {
             sel = currentMove;
             dialogBox.EnableMoveSelector(false);
@@ -379,7 +425,7 @@ public class BattleSystem : MonoBehaviour
             {
                 selectanswer = false;
             }
-            print("boo1" + selectanswer);
+            //print("boo1" + selectanswer);
             StartCoroutine(PerformPlayerMove());
         }
     }

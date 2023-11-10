@@ -161,9 +161,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eac97aad3166d343a8856ff602fd2e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
-  detectionRange: 4
+  moveSpeed: 2
+  detectionRange: 3
   stoppingDistance: 1
-  followDelay: 0
+  followDelay: 2
   playerTransform: {fileID: 0}
   initialPosition: {x: 0, y: 0, z: 0}

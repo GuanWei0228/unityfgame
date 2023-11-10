@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
     
     void StartBattle()
     {
+        
         state = GameState.Battle;
         battleSystem.gameObject.SetActive(true);
         worldCamera.gameObject.SetActive(false);
@@ -34,6 +35,7 @@ public class GameController : MonoBehaviour
 
     void EndBattle(bool won)
     {
+        Time.timeScale = 1;
         state = GameState.FreeRoam;
         battleSystem.gameObject.SetActive(false);
         worldCamera.gameObject.SetActive(true);

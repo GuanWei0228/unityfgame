@@ -3907,7 +3907,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1558876143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5424,6 +5424,7 @@ MonoBehaviour:
   playerHud: {fileID: 1162200120}
   enemyHud: {fileID: 182915298}
   dialogBox: {fileID: 2048021495}
+  maxnumber: 100
   rann: 1
   sel: 0
   answer: 
