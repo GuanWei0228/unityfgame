@@ -8,7 +8,7 @@ using UnityEditor.Search;
 using Firebase.Extensions;
 using UnityEngine.UI;
 
-public enum BattleState { Start, PlayerAction, PlayerMove, EnemyMove, Busy}
+public enum BattleState { Start, PlayerAction, PlayerMove, EnemyMove, Busy }
 
 public class BattleSystem : MonoBehaviour
 {
@@ -44,28 +44,13 @@ public class BattleSystem : MonoBehaviour
     public void StartBattle()
     {
         StartCoroutine(SetupBattle());
+
     }
 
     public IEnumerator SetupBattle()
     {
-        // 生成新的 rann，確保不重複
-        string newRann;
-
-        if (usedRannSet.Count == maxnumber-1)
-        {
-            // 如果所有數字都已經使用過，重新初始化集合
-            usedRannSet.Clear();
-        }
-        do
-        {
-            newRann = UnityEngine.Random.Range(1, maxnumber+1).ToString();
-        } while (usedRannSet.Contains(newRann));
-
-        // 將新的 rann 加入到使用過的 set 中
-        usedRannSet.Add(newRann);
-
-        rann = newRann;
-
+        GetRann();
+        PrintResults(); //輸出wonQuestions lostQuestions
         playerUnit.Setup();
         enemyUnit.Setup();
         playerHud.SetData(playerUnit.Pokemon);
@@ -76,7 +61,7 @@ public class BattleSystem : MonoBehaviour
         //yield return dialogBox.TypeDialog($"A wild {enemyUnit.Pokemon.Base.Name} appeared.");
         yield return dialogBox.TypeDialog($"遇見怪物!");
         yield return new WaitForSeconds(2f);
-        PrintResults(); //輸出wonQuestions lostQuestions
+
 
         PlayerAction();
     }
@@ -86,7 +71,7 @@ public class BattleSystem : MonoBehaviour
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
         //rann = UnityEngine.Random.Range(1, 5).ToString();
         state = BattleState.PlayerAction;
-        
+
         //dialogBox.TypeDialog("");
 
         reference.Child("QAQ").Child("Ans").Child(rann).GetValueAsync().ContinueWithOnMainThread(task => {
@@ -111,7 +96,7 @@ public class BattleSystem : MonoBehaviour
                 DataSnapshot snapshot = task.Result;
                 string dialogMessage = snapshot.Value.ToString();
 
-                string[] lines = dialogMessage.Split('\n');
+                string[] lines = dialogMessage.Split(new[] { "\n", "\r\n", "\r" }, StringSplitOptions.None);
 
                 StartCoroutine(ShowDialogLines(lines));
                 //StartCoroutine(dialogBox.TypeDialog(dialogMessage));
@@ -119,13 +104,31 @@ public class BattleSystem : MonoBehaviour
             }
         });
 
-        
+
 
     }
 
 
     public string GetRann()
     {
+        // 生成新的 rann，確保不重複
+        string newRann;
+
+        if (usedRannSet.Count == maxnumber - 1)
+        {
+            // 如果所有數字都已經使用過，重新初始化集合
+            usedRannSet.Clear();
+        }
+        do
+        {
+            newRann = UnityEngine.Random.Range(1, maxnumber + 1).ToString();
+        } while (usedRannSet.Contains(newRann));
+
+        // 將新的 rann 加入到使用過的 set 中
+        usedRannSet.Add(newRann);
+
+        rann = newRann;
+
         return rann;
     }
 
@@ -138,11 +141,15 @@ public class BattleSystem : MonoBehaviour
             yield return StartCoroutine(dialogBox.TypeDialog(line));
             t++;
         }
-        if (t == numLines) {
+        if (t == numLines)
+        {
             dialogBox.EnableActionSelector(true);
         }
         OnActionComplete?.Invoke();
     }
+
+    
+
 
     public void PlayerMove()
     {
@@ -159,7 +166,7 @@ public class BattleSystem : MonoBehaviour
         dialogBox.EnableDialogText(true);
         PlayerAction();
 
-        
+
     }
 
     IEnumerator PerformPlayerMove()
@@ -172,20 +179,21 @@ public class BattleSystem : MonoBehaviour
         {
             yield return dialogBox.TypeDialog("答對，進行攻擊！");
         }
-        else {
+        else
+        {
             yield return dialogBox.TypeDialog("答錯了哭哭！");
         }
         yield return new WaitForSeconds(1f);
 
         bool isFainted = enemyUnit.Pokemon.EnemyTakeDamage(move, playerUnit.Pokemon);
-       yield return enemyHud.UpdateHP();
+        yield return enemyHud.UpdateHP();
 
         if (isFainted)
         {
             //yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name} Fainted");
             yield return dialogBox.TypeDialog("擊倒怪獸！");
             yield return new WaitForSeconds(2f);
-            wonQuestions.Add(rann);
+
             OnBattleOver(true);
         }
         else
@@ -210,11 +218,16 @@ public class BattleSystem : MonoBehaviour
         {
             yield return dialogBox.TypeDialog("你輸了");
             yield return new WaitForSeconds(2f);
-            lostQuestions.Add(rann);
+
             OnBattleOver(false);
         }
         else
         {
+            yield return dialogBox.TypeDialog("怪物沒死亡，換一個題目！");
+            yield return new WaitForSeconds(2f);
+            GetRann();
+            dialogBox.SetMoveNames(playerUnit.Pokemon.Moves);
+
             PlayerAction();
         }
     }
@@ -243,13 +256,13 @@ public class BattleSystem : MonoBehaviour
 
     public void HandleUpdate()
     {
-        if(state == BattleState.PlayerAction)
+        if (state == BattleState.PlayerAction)
         {
             HandleActionSelection();
         }
-        else if(state == BattleState.PlayerMove)
+        else if (state == BattleState.PlayerMove)
         {
-            HandleMoveSelection();  
+            HandleMoveSelection();
             HandleBackSelection();
         }
     }
@@ -268,20 +281,21 @@ public class BattleSystem : MonoBehaviour
 
         dialogBox.UpdateActionSelection(currentAction);
 
-        if(Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            if(currentAction == 0)
+            if (currentAction == 0)
             {
                 PlayerMove();
             }
-            else if(currentAction == 1)
+            else if (currentAction == 1)
             {
 
             }
         }
     }
 
-    public void ButtonSelect1() {
+    public void ButtonSelect1()
+    {
         sel = 0;
         dialogBox.EnableMoveSelector(false);
         dialogBox.EnableDialogText(true);
@@ -291,17 +305,16 @@ public class BattleSystem : MonoBehaviour
         string selectedMoveText = selectedMoveTextObject.text;
 
         // 在这里使用 selectedMoveText，你可以将其存储、打印或进行其他操作
-        print(answer);
-        Debug.Log("Selected Move Text: " + selectedMoveText);
         if (answer == selectedMoveText)
         {
             selectanswer = true;
+            wonQuestions.Add(rann);
         }
         else
         {
             selectanswer = false;
+            lostQuestions.Add(rann);
         }
-        print("boo1" + selectanswer);
         StartCoroutine(PerformPlayerMove());
     }
 
@@ -316,17 +329,17 @@ public class BattleSystem : MonoBehaviour
         string selectedMoveText = selectedMoveTextObject.text;
 
         // 在这里使用 selectedMoveText，你可以将其存储、打印或进行其他操作
-        print(answer);
-        Debug.Log("Selected Move Text: " + selectedMoveText);
         if (answer == selectedMoveText)
         {
             selectanswer = true;
+            wonQuestions.Add(rann);
         }
         else
         {
             selectanswer = false;
+            lostQuestions.Add(rann);
         }
-        print("boo1" + selectanswer);
+
         StartCoroutine(PerformPlayerMove());
     }
 
@@ -341,17 +354,16 @@ public class BattleSystem : MonoBehaviour
         string selectedMoveText = selectedMoveTextObject.text;
 
         // 在这里使用 selectedMoveText，你可以将其存储、打印或进行其他操作
-        print(answer);
-        Debug.Log("Selected Move Text: " + selectedMoveText);
         if (answer == selectedMoveText)
         {
             selectanswer = true;
+            wonQuestions.Add(rann);
         }
         else
         {
             selectanswer = false;
+            lostQuestions.Add(rann);
         }
-        print("boo1" + selectanswer);
         StartCoroutine(PerformPlayerMove());
     }
 
@@ -366,17 +378,16 @@ public class BattleSystem : MonoBehaviour
         string selectedMoveText = selectedMoveTextObject.text;
 
         // 在这里使用 selectedMoveText，你可以将其存储、打印或进行其他操作
-        print(answer);
-        Debug.Log("Selected Move Text: " + selectedMoveText);
         if (answer == selectedMoveText)
         {
             selectanswer = true;
+            wonQuestions.Add(rann);
         }
         else
         {
             selectanswer = false;
+            lostQuestions.Add(rann);
         }
-        print("boo1" + selectanswer);
         StartCoroutine(PerformPlayerMove());
     }
 
@@ -415,7 +426,6 @@ public class BattleSystem : MonoBehaviour
             string selectedMoveText = selectedMoveTextObject.text;
 
             // 在这里使用 selectedMoveText，你可以将其存储、打印或进行其他操作
-             print(answer);
             Debug.Log("Selected Move Text: " + selectedMoveText);
             if (answer == selectedMoveText)
             {
@@ -430,7 +440,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    
+
 
     void HandleBackSelection()
     {
@@ -454,10 +464,11 @@ public class BattleSystem : MonoBehaviour
                 dialogBox.EnableDialogText(true);
                 PlayerAction();
             }
-            else {
-            
+            else
+            {
+
             }
-            
+
         }
     }
 
