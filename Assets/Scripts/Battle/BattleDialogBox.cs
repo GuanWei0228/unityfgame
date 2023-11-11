@@ -44,17 +44,33 @@ public class BattleDialogBox : MonoBehaviour
         dialogText.text = dialog;   
     }
 
+    
     public IEnumerator TypeDialog(string dialog)
     {
         dialogText.text = "";
+        bool isClickTriggered = false;
+
         foreach (var letter in dialog.ToCharArray())
         {
             dialogText.text += letter;
-            yield return new WaitForSeconds(1f/lettersPerSecond);
+
+            // 檢查是否有點擊觸發
+            if (Input.GetMouseButtonDown(0))
+            {
+                isClickTriggered = true;
+                break;
+            }
+
+            yield return new WaitForSeconds(1f / lettersPerSecond);
+        }
+
+        // 如果點擊觸發了，馬上顯示全部文字
+        if (isClickTriggered)
+        {
+            dialogText.text = dialog;
         }
 
         OnDialogComplete?.Invoke();
-
     }
     public void EnableDialogText(bool enabled)
     {
