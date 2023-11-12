@@ -80,7 +80,7 @@ public class Pokemon : MonoBehaviour
         }
         else
         {
-            print("沒料");
+            //print("沒料");
         }
 
         if (HP <= 0)

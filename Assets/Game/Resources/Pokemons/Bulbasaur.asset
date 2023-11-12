@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b3f6957e43b55b4ab414e60a3960fe7, type: 3}
   m_Name: Bulbasaur
   m_EditorClassIdentifier: 
-  name: Enemy
+  name: Monster
   description: 
   frontSprite: {fileID: 21300000, guid: c3a0ffcab94f86043aa02beca70d680b, type: 3}
   backSprite: {fileID: 21300000, guid: c3a0ffcab94f86043aa02beca70d680b, type: 3}

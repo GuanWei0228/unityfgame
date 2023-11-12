@@ -12,13 +12,16 @@ public enum BattleState { Start, PlayerAction, PlayerMove, EnemyMove, Busy }
 
 public class BattleSystem : MonoBehaviour
 {
-    DatabaseReference reference;
+    //DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
 
     [SerializeField] BattleUnit playerUnit;
     [SerializeField] BattleUnit enemyUnit;
     [SerializeField] BattleHud playerHud;
     [SerializeField] BattleHud enemyHud;
     [SerializeField] BattleDialogBox dialogBox;
+
+    [SerializeField] Text questionTextUI;
+    [SerializeField] Text answerTextUI;
 
     public event Action<bool> OnBattleOver;
 
@@ -32,12 +35,17 @@ public class BattleSystem : MonoBehaviour
     List<string> wonQuestions = new List<string>(); //存正確回答題號
     List<string> lostQuestions = new List<string>();//存錯誤回答題號
 
+    public List<Tuple<string, string>> questionAnswerPairs = new List<Tuple<string, string>>();//存取題目及答案
+
     BattleState state;
     int currentAction;
     int currentMove;
     int currentBack;
 
     public string answer;
+
+    public string panelanswer;
+    public string panelquestion;
     public bool selectanswer;
     string selectedMoveText;
 
@@ -64,7 +72,13 @@ public class BattleSystem : MonoBehaviour
 
 
         PlayerAction();
+        
+
     }
+
+    
+
+
 
     void PlayerAction()
     {
@@ -94,9 +108,9 @@ public class BattleSystem : MonoBehaviour
             if (task.IsCompletedSuccessfully)
             {
                 DataSnapshot snapshot = task.Result;
-                string dialogMessage = snapshot.Value.ToString();
+                panelquestion = snapshot.Value.ToString();
 
-                string[] lines = dialogMessage.Split(new[] { "\n", "\r\n", "\r" }, StringSplitOptions.None);
+                string[] lines = panelquestion.Split(new[] { "\n", "\r\n", "\r" }, StringSplitOptions.None);
 
                 StartCoroutine(ShowDialogLines(lines));
                 //StartCoroutine(dialogBox.TypeDialog(dialogMessage));
@@ -148,7 +162,9 @@ public class BattleSystem : MonoBehaviour
         OnActionComplete?.Invoke();
     }
 
+
     
+
 
 
     public void PlayerMove()
@@ -184,6 +200,7 @@ public class BattleSystem : MonoBehaviour
             yield return dialogBox.TypeDialog("答錯了哭哭！");
         }
         yield return new WaitForSeconds(1f);
+        questionAnswerPairs.Add(new Tuple<string, string>(panelquestion, answer));
 
         bool isFainted = enemyUnit.Pokemon.EnemyTakeDamage(move, playerUnit.Pokemon);
         yield return enemyHud.UpdateHP();
@@ -204,6 +221,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyMove()
     {
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
         state = BattleState.EnemyMove;
 
         var move = enemyUnit.Pokemon.GetRandomMove();
@@ -228,7 +246,15 @@ public class BattleSystem : MonoBehaviour
             GetRann();
             dialogBox.SetMoveNames(playerUnit.Pokemon.Moves);
 
+            
+
+            /*foreach (var pair in questionAnswerPairs) {
+                print("test : " + pair);
+            }*/
+
             PlayerAction();
+
+            
         }
     }
 

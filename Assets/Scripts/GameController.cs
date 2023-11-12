@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] PlayerController playerController;
     [SerializeField] BattleSystem battleSystem;
-    [SerializeField] Canvas joyStick;
+    [SerializeField] Canvas menu;
     [SerializeField] VirtualJoystick virtualJoystick;
     [SerializeField] Canvas map;
     [SerializeField] Camera worldCamera;
@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour
         state = GameState.Battle;
         battleSystem.gameObject.SetActive(true);
         worldCamera.gameObject.SetActive(false);
-        joyStick.gameObject.SetActive(false);
+        menu.gameObject.SetActive(false);
         map.gameObject.SetActive(false);
         virtualJoystick.OnPointerUp(null);
         battleSystem.StartBattle();
@@ -38,8 +38,9 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1;
         state = GameState.FreeRoam;
         battleSystem.gameObject.SetActive(false);
+        menu.gameObject.SetActive(true);
         worldCamera.gameObject.SetActive(true);
-        joyStick.gameObject.SetActive(true);
+        virtualJoystick.gameObject.SetActive(true);
         map.gameObject.SetActive(true);
     }
     
