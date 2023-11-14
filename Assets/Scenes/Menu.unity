@@ -727,6 +727,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193d0c360b9e0fd459764acdeb03df01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleSystem: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  logMenu: {fileID: 0}
+  questionTextUI: {fileID: 0}
+  answerTextUI: {fileID: 0}
 --- !u!1 &1645686197
 GameObject:
   m_ObjectHideFlags: 0

@@ -167,3 +167,4 @@ MonoBehaviour:
   followDelay: 2
   playerTransform: {fileID: 0}
   initialPosition: {x: 0, y: 0, z: 0}
+  monsterBase: {fileID: 11400000, guid: e3fca73a6335944478d13635cf1043c4, type: 2}

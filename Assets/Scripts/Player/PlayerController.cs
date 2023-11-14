@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
-
+    public PokemonBase test;
     Animator anim;
     public event Action OnEncountered;
     public float speed;
@@ -41,13 +41,28 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("speed", movement.magnitude);    
     }
 
-    void OnCollisionEnter2D(Collision2D other)  //other是指碰撞到的東西 
+    void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Monster")
         {
+            HandleMonsterEncounter(other.gameObject);
+        }
+    }
+
+    void HandleMonsterEncounter(GameObject monster)
+    {
+        EnemyMovement monsterScript = monster.GetComponent<EnemyMovement>();
+
+        if (monsterScript != null)
+        {
+            PokemonBase encounteredPokemonBase = monsterScript.GetPokemonBase();
+
+
+            //Debug.Log($"Encountered Pokemon: {encounteredPokemonBase.Name}");
+            //Debug.Log($"Encountered Pokemon: {encounteredPokemonBase.MaxHp}");
+            test = encounteredPokemonBase;
             OnEncountered();
         }
-
-
     }
+
 }

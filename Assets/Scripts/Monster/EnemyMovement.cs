@@ -14,6 +14,12 @@ public class EnemyMovement : MonoBehaviour
     private bool shouldMove = true; // 是否应该移动
     public Vector3 initialPosition; // 初始位置
 
+    [SerializeField] PokemonBase monsterBase;
+
+    public PokemonBase GetPokemonBase()
+    {
+        return monsterBase;
+    }
 
     private void Start()
     {
@@ -85,4 +91,6 @@ public class EnemyMovement : MonoBehaviour
 
         }
     }
+
+
 }

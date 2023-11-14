@@ -13,7 +13,7 @@ public enum BattleState { Start, PlayerAction, PlayerMove, EnemyMove, Busy }
 public class BattleSystem : MonoBehaviour
 {
     //DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-
+    [SerializeField] PlayerController player;
     [SerializeField] BattleUnit playerUnit;
     [SerializeField] BattleUnit enemyUnit;
     [SerializeField] BattleHud playerHud;
@@ -57,8 +57,10 @@ public class BattleSystem : MonoBehaviour
 
     public IEnumerator SetupBattle()
     {
+        Debug.Log($"Encountered Pokemon: {player.test.MaxHp}");
         GetRann();
         PrintResults(); //輸出wonQuestions lostQuestions
+        enemyUnit.ChangeBase(player.test);
         playerUnit.Setup();
         enemyUnit.Setup();
         playerHud.SetData(playerUnit.Pokemon);
@@ -66,17 +68,16 @@ public class BattleSystem : MonoBehaviour
 
         dialogBox.SetMoveNames(playerUnit.Pokemon.Moves);
 
-        //yield return dialogBox.TypeDialog($"A wild {enemyUnit.Pokemon.Base.Name} appeared.");
+        yield return dialogBox.TypeDialog($"A wild {enemyUnit.Pokemon.Base.Name} appeared.");
+        yield return new WaitForSeconds(3f);
         yield return dialogBox.TypeDialog($"遇見怪物!");
         yield return new WaitForSeconds(2f);
 
 
         PlayerAction();
-        
-
     }
 
-    
+
 
 
 

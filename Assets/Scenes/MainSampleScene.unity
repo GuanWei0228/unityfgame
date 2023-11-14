@@ -3038,6 +3038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b232d508fa33e6e4c86f29078f158860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: {fileID: 0}
   speed: 8
 --- !u!50 &941213622
 Rigidbody2D:
@@ -7977,6 +7978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0562a96811dc9c24cb47f57f8f6492af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 941213621}
   playerUnit: {fileID: 1059927504}
   enemyUnit: {fileID: 875983386}
   playerHud: {fileID: 1162200120}
