@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase;
 using Firebase.Database;
-using UnityEditor.Search;
 using Firebase.Extensions;
 using UnityEngine.UI;
 
@@ -68,10 +67,11 @@ public class BattleSystem : MonoBehaviour
 
         dialogBox.SetMoveNames(playerUnit.Pokemon.Moves);
 
-        yield return dialogBox.TypeDialog($"A wild {enemyUnit.Pokemon.Base.Name} appeared.");
-        yield return new WaitForSeconds(3f);
-        yield return dialogBox.TypeDialog($"遇見怪物!");
+
+        yield return dialogBox.TypeDialog($"遇見{enemyUnit.Pokemon.Base.Name}!");
         yield return new WaitForSeconds(2f);
+        yield return dialogBox.TypeDialog($"請根據問題選擇正確選項!");
+        yield return new WaitForSeconds(3f);
 
 
         PlayerAction();
@@ -194,11 +194,11 @@ public class BattleSystem : MonoBehaviour
         //yield return dialogBox.TypeDialog($"{playerUnit.Pokemon.Base.Name} used {move.Base.Name}");
         if (selectanswer == true)
         {
-            yield return dialogBox.TypeDialog("答對，進行攻擊！");
+            yield return dialogBox.TypeDialog($"答對，進行攻擊！");
         }
         else
         {
-            yield return dialogBox.TypeDialog("答錯了哭哭！");
+            yield return dialogBox.TypeDialog($"答錯了哭哭！");
         }
         yield return new WaitForSeconds(1f);
         questionAnswerPairs.Add(new Tuple<string, string>(panelquestion, answer));
@@ -209,7 +209,7 @@ public class BattleSystem : MonoBehaviour
         if (isFainted)
         {
             //yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name} Fainted");
-            yield return dialogBox.TypeDialog("擊倒怪獸！");
+            yield return dialogBox.TypeDialog($"擊倒{enemyUnit.Pokemon.Base.Name}！");
             yield return new WaitForSeconds(2f);
 
             OnBattleOver(true);
@@ -227,7 +227,7 @@ public class BattleSystem : MonoBehaviour
 
         var move = enemyUnit.Pokemon.GetRandomMove();
         //yield return dialogBox.TypeDialog($"{playerUnit.Pokemon.Base.Name} used {move.Base.Name}");
-        yield return dialogBox.TypeDialog("怪物攻擊");
+        yield return dialogBox.TypeDialog($"怪物攻擊");
         yield return new WaitForSeconds(1f);
 
         bool isFainted = playerUnit.Pokemon.MeTakeDamage(move, playerUnit.Pokemon);
@@ -235,14 +235,14 @@ public class BattleSystem : MonoBehaviour
 
         if (isFainted)
         {
-            yield return dialogBox.TypeDialog("你輸了");
+            yield return dialogBox.TypeDialog($"你輸了");
             yield return new WaitForSeconds(2f);
 
             OnBattleOver(false);
         }
         else
         {
-            yield return dialogBox.TypeDialog("怪物沒死亡，換一個題目！");
+            yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name}沒死亡，換一個題目！");
             yield return new WaitForSeconds(2f);
             GetRann();
             dialogBox.SetMoveNames(playerUnit.Pokemon.Moves);

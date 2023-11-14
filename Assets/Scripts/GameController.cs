@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public enum GameState {FreeRoam, Battle}
@@ -10,7 +12,8 @@ public class GameController : MonoBehaviour
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Canvas menu;
     [SerializeField] VirtualJoystick virtualJoystick;
-    [SerializeField] Canvas map;
+    [SerializeField] Canvas minimap;
+    [SerializeField] Canvas mapbutton;
     [SerializeField] Camera worldCamera;
 
     GameState state;
@@ -28,9 +31,11 @@ public class GameController : MonoBehaviour
         battleSystem.gameObject.SetActive(true);
         worldCamera.gameObject.SetActive(false);
         menu.gameObject.SetActive(false);
-        map.gameObject.SetActive(false);
+        mapbutton.gameObject.SetActive(false);
+        minimap.gameObject.SetActive(false);
         virtualJoystick.OnPointerUp(null);
         battleSystem.StartBattle();
+        
     }
 
     void EndBattle(bool won)
@@ -41,7 +46,7 @@ public class GameController : MonoBehaviour
         menu.gameObject.SetActive(true);
         worldCamera.gameObject.SetActive(true);
         virtualJoystick.gameObject.SetActive(true);
-        map.gameObject.SetActive(true);
+        mapbutton.gameObject.SetActive(true);
     }
     
     private void Update()

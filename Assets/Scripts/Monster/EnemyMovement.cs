@@ -8,8 +8,6 @@ public class EnemyMovement : MonoBehaviour
     public float stoppingDistance; // 距离玩家多远时停止移动
     public float followDelay; // 停留在探测范围内一定时间后开始跟随
     public Transform playerTransform; // 玩家的Transform组件
-
-    private bool playerInDetectionRange; // 玩家是否在探测范围内
     private float followTimer; // 跟随计时器
     private bool shouldMove = true; // 是否应该移动
     public Vector3 initialPosition; // 初始位置
@@ -45,7 +43,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (shouldMove && distanceToPlayer <= detectionRange)
         {
-            playerInDetectionRange = true;
+
 
             // 开始计时
             followTimer += Time.deltaTime;
@@ -70,7 +68,6 @@ public class EnemyMovement : MonoBehaviour
         {
             // 如果玩家不在探测范围内，重置计时器和移动标志
             moveSpeed = 2f;
-            playerInDetectionRange = false;
             followTimer = 0f;
             shouldMove = true;
         }

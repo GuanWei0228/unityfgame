@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class NewBehaviourScript : MonoBehaviour
+public class Menu : MonoBehaviour
 {
     [SerializeField] BattleSystem battleSystem;
     public GameObject pauseMenu;
@@ -77,12 +77,9 @@ public class NewBehaviourScript : MonoBehaviour
             string questionText = questionAnswerPair.Item1;
             string answerText = questionAnswerPair.Item2;
 
-            // 將題目和答案顯示在UI的Text元素中
             questionTextUI.text = questionText;
             answerTextUI.text = answerText;
 
-            // 清空列表中的第一對題目和答案
-            //battleSystem.questionAnswerPairs.RemoveAt(q); // 移除的索引應該是 q，而不是 0
         }
     }
 }

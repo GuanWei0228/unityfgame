@@ -2104,7 +2104,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -103.78, y: -3.09}
-  m_SizeDelta: {x: 568.45, y: 72.5}
+  m_SizeDelta: {x: 568.45, y: 71.666664}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &679041888
 CanvasRenderer:
@@ -2779,7 +2779,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 208, y: 66}
+  m_AnchoredPosition: {x: 220, y: 100}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &875983384
@@ -4665,7 +4665,8 @@ MonoBehaviour:
   battleSystem: {fileID: 2029895964}
   menu: {fileID: 286486997}
   virtualJoystick: {fileID: 1555083872}
-  map: {fileID: 1439961120}
+  minimap: {fileID: 1558876145}
+  mapbutton: {fileID: 1439961120}
   worldCamera: {fileID: 519420031}
 --- !u!4 &1255254680
 Transform:
@@ -5188,7 +5189,7 @@ GameObject:
   - component: {fileID: 1439961119}
   - component: {fileID: 1439961118}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: mapbutton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

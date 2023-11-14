@@ -47,6 +47,11 @@ public class PlayerController : MonoBehaviour
         {
             HandleMonsterEncounter(other.gameObject);
         }
+
+        if (other.gameObject.tag == "Boss")
+        {
+            HandleMonsterEncounter(other.gameObject);
+        }
     }
 
     void HandleMonsterEncounter(GameObject monster)
