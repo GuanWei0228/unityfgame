@@ -2410,7 +2410,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterPrefabs:
-  - {fileID: 6802334933713924980, guid: f1c83a8265549ff478d87bd8b74c71b0, type: 3}
+  - {fileID: 3366057938628945624, guid: 44c30d7263441f64badf217a67b17582, type: 3}
+  - {fileID: 3578057764073778790, guid: 64ae5a5ab13a45046a8c70057cfe82e7, type: 3}
+  - {fileID: 3237420227432757771, guid: 6fb0238c75c178b4fbc97203ba535e6f, type: 3}
   spawnPoint: {fileID: 4870281072760598328}
   yourMaxValue: 1
 --- !u!1 &4929789701845472523
@@ -2728,7 +2730,7 @@ Transform:
   m_GameObject: {fileID: 8687309202243535776}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

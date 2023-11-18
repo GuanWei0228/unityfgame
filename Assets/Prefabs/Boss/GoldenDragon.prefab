@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 4732130019409682213}
   - component: {fileID: -1128890686434485333}
   - component: {fileID: -1162795334281911890}
+  - component: {fileID: 7878485658660536037}
   m_Layer: 0
-  m_Name: GreatGoldenWyrmIdle
-  m_TagString: Untagged
+  m_Name: GoldenDragon
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1762626239
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 1512426613214165385, guid: d88c7fe78d002114b8cd909d7464abe7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -158,7 +159,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -169,4 +170,19 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!114 &7878485658660536037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3366057938628945624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6ca3618f23a344c95313379506aef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  initialPosition: {x: 0, y: 0, z: 0}
+  monsterBase: {fileID: 11400000, guid: 8c5c9b27a00747e43932ddb09d5fc2ca, type: 2}

@@ -2384,7 +2384,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.04831648}
+  m_Offset: {x: 0, y: -0.011315823}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2395,7 +2395,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 16.5, y: 8.103368}
+  m_Size: {x: 16.5, y: 7.984103}
   m_EdgeRadius: 0
 --- !u!114 &7372296657622173336
 MonoBehaviour:
@@ -2410,9 +2410,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterPrefabs:
-  - {fileID: 8291573618515308742, guid: 2dbd7be1488eced4298619fdf3798026, type: 3}
-  - {fileID: 4543521854710158341, guid: 3bc2d7d79d8e2824b97693f6dc972789, type: 3}
-  - {fileID: 1023121917069458664, guid: 9e6f3ddee28fc7243b0f94f8c9776a84, type: 3}
+  - {fileID: 5700748146778210275, guid: bdb1cf140a7f6844491c9cdd80be01b2, type: 3}
+  - {fileID: 1672356195514010299, guid: 57eb5819c6504af479c6292c30105531, type: 3}
+  - {fileID: 1583731459330472940, guid: f433a36c7ad2c0441b451c10d2e6c14e, type: 3}
+  - {fileID: 5725438049252232791, guid: 243ae8cbde418fd4ab701a2136b7f41e, type: 3}
+  - {fileID: 3662976535099473530, guid: 85880a2ea63443142b595e4eceb29eb3, type: 3}
   spawnPoint: {fileID: 4870281072760598328}
   yourMaxValue: 2
 --- !u!1 &4929789701845472523

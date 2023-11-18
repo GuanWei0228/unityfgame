@@ -50,21 +50,30 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.tag == "Boss")
         {
-            HandleMonsterEncounter(other.gameObject);
+            HandleBossEncounter(other.gameObject);
         }
     }
 
-    void HandleMonsterEncounter(GameObject monster)
+    void HandleMonsterEncounter(GameObject Monster)
     {
-        EnemyMovement monsterScript = monster.GetComponent<EnemyMovement>();
+        EnemyMovement MonsterScript = Monster.GetComponent<EnemyMovement>();
 
-        if (monsterScript != null)
+        if (MonsterScript != null)
         {
-            PokemonBase encounteredPokemonBase = monsterScript.GetPokemonBase();
+            PokemonBase encounteredPokemonBase = MonsterScript.GetPokemonBase();
 
+            test = encounteredPokemonBase;
+            OnEncountered();
+        }
+    }
+    void HandleBossEncounter(GameObject Boss)
+    {
+        BossMovement BossScript = Boss.GetComponent<BossMovement>();
 
-            //Debug.Log($"Encountered Pokemon: {encounteredPokemonBase.Name}");
-            //Debug.Log($"Encountered Pokemon: {encounteredPokemonBase.MaxHp}");
+        if (BossScript != null)
+        {
+            PokemonBase encounteredPokemonBase = BossScript.GetPokemonBase();
+
             test = encounteredPokemonBase;
             OnEncountered();
         }

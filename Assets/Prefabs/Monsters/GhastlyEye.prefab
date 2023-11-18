@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -5240941500543482831}
   m_Layer: 0
   m_Name: GhastlyEye
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1762626239
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -4197694467652012512, guid: c87ce1d15ef91874ab73f1a9adbdecbc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -121,13 +121,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eac97aad3166d343a8856ff602fd2e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  detectionRange: 0
-  stoppingDistance: 0
-  followDelay: 0
+  moveSpeed: 3
+  detectionRange: 2
+  stoppingDistance: 1
+  followDelay: 2
   playerTransform: {fileID: 0}
   initialPosition: {x: 0, y: 0, z: 0}
-  monsterBase: {fileID: 0}
+  monsterBase: {fileID: 11400000, guid: ad468d452a7881c41a7fddbb0ba07c70, type: 2}
 --- !u!50 &-6510392245620672503
 Rigidbody2D:
   serializedVersion: 4
@@ -143,7 +143,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -153,8 +153,8 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!70 &-5240941500543482831
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

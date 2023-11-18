@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2349307448003750773}
   m_Layer: 0
   m_Name: BrittleArcher
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1762626239
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -537585746809037445, guid: 5260e84838565a144af14391a6ad8081, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -124,7 +124,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -134,8 +134,8 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!114 &4458808701591315536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,13 +148,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eac97aad3166d343a8856ff602fd2e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  detectionRange: 0
-  stoppingDistance: 0
-  followDelay: 0
+  moveSpeed: 2
+  detectionRange: 2
+  stoppingDistance: 1
+  followDelay: 2
   playerTransform: {fileID: 0}
   initialPosition: {x: 0, y: 0, z: 0}
-  monsterBase: {fileID: 0}
+  monsterBase: {fileID: 11400000, guid: 1503d7bcacd87be4780b9c0f4f4ad374, type: 2}
 --- !u!70 &2349307448003750773
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

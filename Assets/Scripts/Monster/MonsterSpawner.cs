@@ -32,18 +32,22 @@ public class MonsterSpawner : MonoBehaviour
 
     private Vector3 GetRandomSpawnPosition()
     {
-        // 获取房间的Collider范围
+        // 取得房間的 Collider 范圍
         Collider2D roomCollider = GetComponent<Collider2D>();
         Vector2 roomMin = roomCollider.bounds.min;
         Vector2 roomMax = roomCollider.bounds.max;
 
-        // 随机生成怪物的位置在房间内
-        float randomX = Random.Range(roomMin.x, roomMax.x);
-        float randomY = Random.Range(roomMin.y, roomMax.y);
+        // 設定生成位置的緩衝區，避免怪物生成在邊界上
+        float buffer = 1.0f;
 
-        // 使用房间的z轴作为生成怪物的z轴
+        // 隨機生成怪物的位置在房間內
+        float randomX = Random.Range(roomMin.x + buffer, roomMax.x - buffer);
+        float randomY = Random.Range(roomMin.y + buffer, roomMax.y - buffer);
+
+        // 使用房間的 z 軸作為生成怪物的 z 軸
         float spawnZ = transform.position.z;
 
         return new Vector3(randomX, randomY, spawnZ);
     }
+
 }
