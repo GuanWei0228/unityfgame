@@ -700,7 +700,7 @@ MonoBehaviour:
   direction: 2
   roomPrefab: {fileID: 7798232528231620247, guid: e26cf4c3b4263764ba4e8a5b91502190, type: 3}
   BossroomPrefab: {fileID: 7798232528231620247, guid: 10c5af51c0e26d44c888ce29398f8a5d, type: 3}
-  roomNumber: 10
+  roomNumber: 3
   startColor: {r: 0, g: 1, b: 0, a: 1}
   endColor: {r: 0.9528302, g: 0, b: 0, a: 1}
   bossColor: {r: 0, g: 0, b: 0, a: 0}
@@ -3005,7 +3005,6 @@ GameObject:
   - component: {fileID: 941213623}
   - component: {fileID: 941213622}
   - component: {fileID: 941213621}
-  - component: {fileID: 941213624}
   - component: {fileID: 941213625}
   - component: {fileID: 941213626}
   m_Layer: 0
@@ -3111,12 +3110,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941213617}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b232d508fa33e6e4c86f29078f158860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   test: {fileID: 11400000, guid: e3fca73a6335944478d13635cf1043c4, type: 2}
+  Monstertag: 
   speed: 8
 --- !u!50 &941213622
 Rigidbody2D:
@@ -3190,18 +3190,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6579435, y: 0.666271}
   m_EdgeRadius: 0
---- !u!114 &941213624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 941213617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d4b0e8686cbfbf40ac02a7999326dc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &941213625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4829,6 +4817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 941213621}
+  life: {fileID: 941213626}
   battleSystem: {fileID: 2029895964}
   menu: {fileID: 286486997}
   virtualJoystick: {fileID: 1555083872}
@@ -8147,6 +8136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 941213621}
+  playerphone: {fileID: 941213625}
+  life: {fileID: 941213626}
   playerUnit: {fileID: 1059927504}
   enemyUnit: {fileID: 875983386}
   playerHud: {fileID: 1162200120}

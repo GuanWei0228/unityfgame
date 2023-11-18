@@ -13,16 +13,20 @@ public class BattleSystem : MonoBehaviour
 {
     //DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
     [SerializeField] PlayerController player;
+    [SerializeField] PlayerControllerPhone playerphone;
+    [SerializeField] PlayerLife life;
     [SerializeField] BattleUnit playerUnit;
     [SerializeField] BattleUnit enemyUnit;
     [SerializeField] BattleHud playerHud;
     [SerializeField] BattleHud enemyHud;
     [SerializeField] BattleDialogBox dialogBox;
 
+
     [SerializeField] Text questionTextUI;
     [SerializeField] Text answerTextUI;
 
     public event Action<bool> OnBattleOver;
+    public event Action<bool> Onwingame;
 
     public event Action OnActionComplete; // 定義一個事件
 
@@ -51,27 +55,29 @@ public class BattleSystem : MonoBehaviour
     public void StartBattle()
     {
         StartCoroutine(SetupBattle());
-
+        player.speed = 0f;
+        playerphone.speed = 0f;
+        //life.hpBar.GetComponent<Image>().fillAmount -= 0.55f;
+        //print(life.playerHP);
     }
 
     public IEnumerator SetupBattle()
     {
-        Debug.Log($"Encountered Pokemon: {player.test.MaxHp}");
+
         GetRann();
-        PrintResults(); //輸出wonQuestions lostQuestions
+        //PrintResults(); //輸出wonQuestions lostQuestions
         enemyUnit.ChangeBase(player.test);
         playerUnit.Setup();
         enemyUnit.Setup();
         playerHud.SetData(playerUnit.Pokemon);
         enemyHud.SetData(enemyUnit.Pokemon);
-
         dialogBox.SetMoveNames(playerUnit.Pokemon.Moves);
 
 
         yield return dialogBox.TypeDialog($"遇見{enemyUnit.Pokemon.Base.Name}!");
         yield return new WaitForSeconds(2f);
         yield return dialogBox.TypeDialog($"請根據問題選擇正確選項!");
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
 
         PlayerAction();
@@ -129,7 +135,7 @@ public class BattleSystem : MonoBehaviour
         // 生成新的 rann，確保不重複
         string newRann;
 
-        if (usedRannSet.Count == maxnumber - 1)
+        if (usedRannSet.Count == maxnumber - 1 || player.Monstertag == "Boss")
         {
             // 如果所有數字都已經使用過，重新初始化集合
             usedRannSet.Clear();
@@ -164,7 +170,7 @@ public class BattleSystem : MonoBehaviour
     }
 
 
-    
+
 
 
 
@@ -195,10 +201,12 @@ public class BattleSystem : MonoBehaviour
         if (selectanswer == true)
         {
             yield return dialogBox.TypeDialog($"答對，進行攻擊！");
+            yield return new WaitForSeconds(1f);
         }
         else
         {
             yield return dialogBox.TypeDialog($"答錯了哭哭！");
+            yield return new WaitForSeconds(1f);
         }
         yield return new WaitForSeconds(1f);
         questionAnswerPairs.Add(new Tuple<string, string>(panelquestion, answer));
@@ -206,15 +214,31 @@ public class BattleSystem : MonoBehaviour
         bool isFainted = enemyUnit.Pokemon.EnemyTakeDamage(move, playerUnit.Pokemon);
         yield return enemyHud.UpdateHP();
 
-        if (isFainted)
+        if (isFainted == true && player.Monstertag == "Monster")
         {
             //yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name} Fainted");
             yield return dialogBox.TypeDialog($"擊倒{enemyUnit.Pokemon.Base.Name}！");
             yield return new WaitForSeconds(2f);
 
             OnBattleOver(true);
+            player.speed = 5f;
+            playerphone.speed = 5f;
         }
-        else
+        else if (isFainted == false && player.Monstertag == "Monster")
+        {
+            StartCoroutine(EnemyMove());
+        }
+        if (isFainted == true && player.Monstertag == "Boss")
+        {
+            //yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name} Fainted");
+            yield return dialogBox.TypeDialog($"擊倒{enemyUnit.Pokemon.Base.Name}！");
+            yield return new WaitForSeconds(2f);
+
+            Onwingame(true);
+            player.speed = 5f;
+            playerphone.speed = 5f;
+        }
+        else if (isFainted == false && player.Monstertag == "Boss")
         {
             StartCoroutine(EnemyMove());
         }
@@ -227,35 +251,62 @@ public class BattleSystem : MonoBehaviour
 
         var move = enemyUnit.Pokemon.GetRandomMove();
         //yield return dialogBox.TypeDialog($"{playerUnit.Pokemon.Base.Name} used {move.Base.Name}");
-        yield return dialogBox.TypeDialog($"怪物攻擊");
-        yield return new WaitForSeconds(1f);
+        if (selectanswer == true)
+        {
+            yield return dialogBox.TypeDialog($"答對！閃避怪物攻擊！");
+            yield return new WaitForSeconds(1f);
+        }
+        else
+        {
+            yield return dialogBox.TypeDialog($"答錯！怪物攻擊");
+            yield return new WaitForSeconds(1f);
+        }
 
         bool isFainted = playerUnit.Pokemon.MeTakeDamage(move, playerUnit.Pokemon);
         yield return playerHud.UpdateHP();
 
-        if (isFainted)
+        if (isFainted == true && player.Monstertag =="Monster")
         {
             yield return dialogBox.TypeDialog($"你輸了");
             yield return new WaitForSeconds(2f);
 
+            life.playerHP -= 10f;
+            life.hpBar.GetComponent<Image>().fillAmount -= 0.10f;
             OnBattleOver(false);
+            player.speed = 5f;
+            playerphone.speed = 5f;
         }
-        else
+        else if(isFainted == false && player.Monstertag == "Monster")
         {
             yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name}沒死亡，換一個題目！");
             yield return new WaitForSeconds(2f);
             GetRann();
             dialogBox.SetMoveNames(playerUnit.Pokemon.Moves);
 
-            
-
-            /*foreach (var pair in questionAnswerPairs) {
-                print("test : " + pair);
-            }*/
 
             PlayerAction();
+        }
 
-            
+        if (isFainted == true && player.Monstertag == "Boss")
+        {
+            yield return dialogBox.TypeDialog($"你輸了");
+            yield return new WaitForSeconds(2f);
+
+            life.playerHP -= 100f;
+            life.hpBar.GetComponent<Image>().fillAmount -= 1f;
+            OnBattleOver(false);
+            player.speed = 5f;
+            playerphone.speed = 5f;
+        }
+        else if (isFainted == false && player.Monstertag == "Boss")
+        {
+            yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name}沒死亡，換一個題目！");
+            yield return new WaitForSeconds(2f);
+            GetRann();
+            dialogBox.SetMoveNames(playerUnit.Pokemon.Moves);
+
+
+            PlayerAction();
         }
     }
 

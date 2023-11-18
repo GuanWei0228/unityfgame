@@ -7,11 +7,14 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
-    public PokemonBase test;
     Animator anim;
+    Vector2 movement;
+    public PokemonBase test;
+    public string Monstertag;
     public event Action OnEncountered;
     public float speed;
-    Vector2 movement;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,29 +36,32 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement *speed*Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
     }
 
-    void SwitchAnim() 
+    void SwitchAnim()
     {
-        anim.SetFloat("speed", movement.magnitude);    
+        anim.SetFloat("speed", movement.magnitude);
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Monster")
         {
+            Monstertag = other.gameObject.tag;
             HandleMonsterEncounter(other.gameObject);
         }
 
         if (other.gameObject.tag == "Boss")
         {
+            Monstertag = other.gameObject.tag;
             HandleBossEncounter(other.gameObject);
         }
     }
 
     void HandleMonsterEncounter(GameObject Monster)
     {
+
         EnemyMovement MonsterScript = Monster.GetComponent<EnemyMovement>();
 
         if (MonsterScript != null)
@@ -63,6 +69,7 @@ public class PlayerController : MonoBehaviour
             PokemonBase encounteredPokemonBase = MonsterScript.GetPokemonBase();
 
             test = encounteredPokemonBase;
+
             OnEncountered();
         }
     }

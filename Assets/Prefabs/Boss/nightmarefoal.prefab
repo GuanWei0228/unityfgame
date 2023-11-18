@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8802180673175055361}
   - component: {fileID: 4842366530511209511}
   - component: {fileID: 3175496863147907730}
-  - component: {fileID: 986625320989256948}
   - component: {fileID: -2469768055954182803}
+  - component: {fileID: 9193577181963954770}
   m_Layer: 0
   m_Name: nightmarefoal
   m_TagString: Boss
@@ -136,7 +136,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!70 &986625320989256948
+--- !u!114 &-2469768055954182803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3578057764073778790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6ca3618f23a344c95313379506aef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  initialPosition: {x: 0, y: 0, z: 0}
+  monsterBase: {fileID: 11400000, guid: e873fb7ef5916074eb3f63a0cd9cdef2, type: 2}
+--- !u!70 &9193577181963954770
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,21 +183,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.049999952, y: 1.6}
-  m_Size: {x: 3.1, y: 3.2}
+  m_Offset: {x: -0.099999905, y: 3.2}
+  m_Size: {x: 6.2, y: 6.4}
   m_Direction: 0
---- !u!114 &-2469768055954182803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3578057764073778790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e6ca3618f23a344c95313379506aef2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  initialPosition: {x: 0, y: 0, z: 0}
-  monsterBase: {fileID: 11400000, guid: e873fb7ef5916074eb3f63a0cd9cdef2, type: 2}
