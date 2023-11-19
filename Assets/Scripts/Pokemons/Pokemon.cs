@@ -71,7 +71,7 @@ public class Pokemon : MonoBehaviour
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
         float modifiers = Random.Range(0.85f, 1f);
         float a = (2 * attacker.Level + 10) / 250f;
-        float d =  move.Base.Power * ((float)attacker.Attack / Defense) + 2;
+        float d =  a * move.Base.Power * ((float)attacker.Attack / Defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
         print(damage);
 
@@ -101,7 +101,7 @@ public class Pokemon : MonoBehaviour
 
         float modifiers = Random.Range(0.85f, 1f);
         float a = (2 * attacker.Level + 10) / 250f;
-        float d = move.Base.Power * ((float)attacker.Attack / Defense) + 2;
+        float d = a * move.Base.Power * ((float)attacker.Attack / Defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
         print(damage);
         BattleSystem battleSystem = FindObjectOfType<BattleSystem>();

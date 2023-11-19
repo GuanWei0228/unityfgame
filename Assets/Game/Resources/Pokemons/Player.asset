@@ -18,7 +18,7 @@ MonoBehaviour:
   backSprite: {fileID: 763491664, guid: e43eebdfbc380d74f9eef691666bffdf, type: 3}
   type1: 0
   type2: 0
-  maxHp: 1
+  maxHp: 1200
   attack: 30
   defense: 200
   spAttack: 60

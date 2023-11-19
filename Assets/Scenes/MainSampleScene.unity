@@ -1407,6 +1407,7 @@ MonoBehaviour:
   LoseMenu: {fileID: 300361392}
   logMenu: {fileID: 820109015}
   HealthPoint: {fileID: 292969733}
+  minimap: {fileID: 1558876145}
   questionTextUI: {fileID: 902983390}
   answerTextUI: {fileID: 1726445154}
 --- !u!114 &286486995
@@ -5162,7 +5163,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restart
+  m_text: Continue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
@@ -5722,7 +5723,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1108033696}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 286486994}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1108033696
 MonoBehaviour:
   m_ObjectHideFlags: 0

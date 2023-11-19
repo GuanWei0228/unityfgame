@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor.Experimental.GraphView;
 
 public class Menu : MonoBehaviour
 {
@@ -13,8 +14,10 @@ public class Menu : MonoBehaviour
     public GameObject LoseMenu;
     public GameObject logMenu;
     public GameObject HealthPoint;
+    public Canvas minimap;
     public Text questionTextUI;
     public Text answerTextUI;
+    
 
     int q;
 
@@ -39,6 +42,7 @@ public class Menu : MonoBehaviour
 
     public void PauseGame() 
     {
+        minimap.gameObject.SetActive(false);
         pauseMenu.SetActive(true);
         HealthPoint.SetActive(false);
         Time.timeScale = 0f;
@@ -52,6 +56,7 @@ public class Menu : MonoBehaviour
 
     public void OpenLog()
     {
+        minimap.gameObject.SetActive(false);
         HealthPoint.SetActive(false);
         logMenu.SetActive(true);
         q = 0;
