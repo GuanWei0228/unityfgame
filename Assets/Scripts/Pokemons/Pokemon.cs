@@ -63,7 +63,7 @@ public class Pokemon : MonoBehaviour
     }
     public int MaxHp
     {
-        get { return Mathf.FloorToInt((Base.Speed * Level) / 100f) + 10; }
+        get { return Mathf.FloorToInt((Base.MaxHp * Level) / 100f) + 10; }
     }
 
     public bool EnemyTakeDamage(Move move, Pokemon attacker)
@@ -71,8 +71,9 @@ public class Pokemon : MonoBehaviour
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
         float modifiers = Random.Range(0.85f, 1f);
         float a = (2 * attacker.Level + 10) / 250f;
-        float d = a * move.Base.Power * ((float)attacker.Attack / Defense) + 2;
+        float d =  move.Base.Power * ((float)attacker.Attack / Defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
+        print(damage);
 
         BattleSystem battleSystem = FindObjectOfType<BattleSystem>();
         bool answer = battleSystem.selectanswer;
@@ -100,9 +101,9 @@ public class Pokemon : MonoBehaviour
 
         float modifiers = Random.Range(0.85f, 1f);
         float a = (2 * attacker.Level + 10) / 250f;
-        float d = a * move.Base.Power * ((float)attacker.Attack / Defense) + 2;
+        float d = move.Base.Power * ((float)attacker.Attack / Defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
-
+        print(damage);
         BattleSystem battleSystem = FindObjectOfType<BattleSystem>();
         bool answer = battleSystem.selectanswer;
 

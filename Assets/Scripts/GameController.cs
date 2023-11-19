@@ -17,12 +17,16 @@ public class GameController : MonoBehaviour
     [SerializeField] Canvas minimap;
     [SerializeField] Canvas mapbutton;
     [SerializeField] Camera worldCamera;
+    [SerializeField] GameObject WinMenu;
+    [SerializeField] GameObject LoseMenu;
+
 
     GameState state;
     private bool hasLost = false;
 
     private void Start()
     {
+        Time.timeScale = 1.0f;
         playerController.OnEncountered += StartBattle;
         battleSystem.OnBattleOver += EndBattle;
         battleSystem.Onwingame += WinGame;
@@ -60,23 +64,26 @@ public class GameController : MonoBehaviour
         worldCamera.gameObject.SetActive(true);
         virtualJoystick.gameObject.SetActive(true);
         mapbutton.gameObject.SetActive(true);
-        print("win");
+        WinMenu.gameObject.SetActive(true);
+        Time.timeScale = 0f;
     }
     void LoseGame()
     {
         if (hasLost)
         {
+            state = GameState.FreeRoam;
+            battleSystem.gameObject.SetActive(false);
+            menu.gameObject.SetActive(true);
+            worldCamera.gameObject.SetActive(true);
+            virtualJoystick.gameObject.SetActive(true);
+            mapbutton.gameObject.SetActive(true);
+            LoseMenu.gameObject.SetActive(true);
+            Time.timeScale = 0f;
             return; // 如果已经输掉，不再执行以下代码
         }
 
         hasLost = true; // 设置为 true，表示已经输掉
-        state = GameState.FreeRoam;
-        battleSystem.gameObject.SetActive(false);
-        menu.gameObject.SetActive(true);
-        worldCamera.gameObject.SetActive(true);
-        virtualJoystick.gameObject.SetActive(true);
-        mapbutton.gameObject.SetActive(true);
-        print("lose");
+
     }
 
 

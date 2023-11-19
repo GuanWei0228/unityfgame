@@ -9,7 +9,10 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] BattleSystem battleSystem;
     public GameObject pauseMenu;
+    public GameObject WinMenu;
+    public GameObject LoseMenu;
     public GameObject logMenu;
+    public GameObject HealthPoint;
     public Text questionTextUI;
     public Text answerTextUI;
 
@@ -17,7 +20,17 @@ public class Menu : MonoBehaviour
 
     public void PlayGame() 
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("MainSampleScene");
+        Time.timeScale = 1.0f;
+    }
+    public void ReStart()
+    {
+        SceneManager.LoadScene("MainSampleScene");
+        Time.timeScale = 1.0f;
+    }
+    public void GoMenu()
+    {
+        SceneManager.LoadScene("menu");
     }
     public void QuitGame()
     {
@@ -27,16 +40,19 @@ public class Menu : MonoBehaviour
     public void PauseGame() 
     {
         pauseMenu.SetActive(true);
+        HealthPoint.SetActive(false);
         Time.timeScale = 0f;
     }
     public void ContinueGame()
     {
         pauseMenu.SetActive(false);
+        HealthPoint.SetActive(true);
         Time.timeScale = 1.0f;
     }
 
     public void OpenLog()
     {
+        HealthPoint.SetActive(false);
         logMenu.SetActive(true);
         q = 0;
         ShowNextQuestion();
@@ -45,6 +61,7 @@ public class Menu : MonoBehaviour
 
     public void CloseLog()
     {
+        HealthPoint.SetActive(true);
         logMenu.SetActive(false);
         q = 0;
         Time.timeScale = 1.0f;

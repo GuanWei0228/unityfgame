@@ -75,9 +75,9 @@ public class BattleSystem : MonoBehaviour
 
 
         yield return dialogBox.TypeDialog($"遇見{enemyUnit.Pokemon.Base.Name}!");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         yield return dialogBox.TypeDialog($"請根據問題選擇正確選項!");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
 
         PlayerAction();
@@ -218,7 +218,7 @@ public class BattleSystem : MonoBehaviour
         {
             //yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name} Fainted");
             yield return dialogBox.TypeDialog($"擊倒{enemyUnit.Pokemon.Base.Name}！");
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.5f);
 
             OnBattleOver(true);
             player.speed = 5f;
@@ -232,7 +232,7 @@ public class BattleSystem : MonoBehaviour
         {
             //yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name} Fainted");
             yield return dialogBox.TypeDialog($"擊倒{enemyUnit.Pokemon.Base.Name}！");
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.5f);
 
             Onwingame(true);
             player.speed = 5f;
@@ -268,7 +268,7 @@ public class BattleSystem : MonoBehaviour
         if (isFainted == true && player.Monstertag =="Monster")
         {
             yield return dialogBox.TypeDialog($"你輸了");
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.5f);
 
             life.playerHP -= 10f;
             life.hpBar.GetComponent<Image>().fillAmount -= 0.10f;
@@ -279,7 +279,7 @@ public class BattleSystem : MonoBehaviour
         else if(isFainted == false && player.Monstertag == "Monster")
         {
             yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name}沒死亡，換一個題目！");
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.5f);
             GetRann();
             dialogBox.SetMoveNames(playerUnit.Pokemon.Moves);
 

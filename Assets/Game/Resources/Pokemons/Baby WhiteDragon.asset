@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b3f6957e43b55b4ab414e60a3960fe7, type: 3}
   m_Name: Baby WhiteDragon
   m_EditorClassIdentifier: 
-  name: Baby WhiteDragon
+  name: BabyWhiteDragon
   description: 
   frontSprite: {fileID: 2214988505919721507, guid: 6946ea3319791cd4496101433b17387b, type: 3}
   backSprite: {fileID: 2214988505919721507, guid: 6946ea3319791cd4496101433b17387b, type: 3}

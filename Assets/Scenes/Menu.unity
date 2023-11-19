@@ -283,7 +283,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 54b2cb06e79fb6942a09b1cd8d0d3e28, type: 3}
+  m_Sprite: {fileID: -377832543, guid: ea33215177cc81c4584949dfaebdc5b9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -729,7 +729,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleSystem: {fileID: 0}
   pauseMenu: {fileID: 0}
+  WinMenu: {fileID: 0}
+  LoseMenu: {fileID: 0}
   logMenu: {fileID: 0}
+  HealthPoint: {fileID: 0}
   questionTextUI: {fileID: 0}
   answerTextUI: {fileID: 0}
 --- !u!1 &1645686197

@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  detectionRange: 2
+  detectionRange: 3
   stoppingDistance: 1
   followDelay: 2
   playerTransform: {fileID: 0}

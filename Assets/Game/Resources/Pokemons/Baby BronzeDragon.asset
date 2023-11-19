@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b3f6957e43b55b4ab414e60a3960fe7, type: 3}
   m_Name: Baby BronzeDragon
   m_EditorClassIdentifier: 
-  name: Baby BronzeDragon
+  name: BabyBronzeDragon
   description: 
   frontSprite: {fileID: -7221649521033045276, guid: 6ed87002358200242a5d5dd6212eb37c, type: 3}
   backSprite: {fileID: -7221649521033045276, guid: 6ed87002358200242a5d5dd6212eb37c, type: 3}
@@ -27,7 +27,3 @@ MonoBehaviour:
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: beff9780425461f458ca25f9f37a03f4, type: 2}
     level: 1
-  - moveBase: {fileID: 11400000, guid: 0c93f9a59de7b084a9d48a7453101327, type: 2}
-    level: 4
-  - moveBase: {fileID: 11400000, guid: 7bf594fb398b439429349e62ca6bbf14, type: 2}
-    level: 7

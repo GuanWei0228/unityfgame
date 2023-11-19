@@ -15,6 +15,6 @@ MonoBehaviour:
   name: Tackle
   description: 
   type: 0
-  power: 40
+  power: 400
   accuracy: 100
   pp: 20
