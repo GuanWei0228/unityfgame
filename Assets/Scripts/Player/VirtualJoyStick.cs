@@ -4,15 +4,15 @@ using UnityEngine.EventSystems;
 
 public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
-    private Image joystickBackground; // ·n±ìªº­I´º
-    private Image joystickHandle; // ·n±ìªº¤â¬`
+    private Image joystickBackground; // ï¿½nï¿½ìªºï¿½Iï¿½ï¿½
+    private Image joystickHandle; // ï¿½nï¿½ìªºï¿½ï¿½`
 
     private Vector3 inputVector;
 
     private void Start()
     {
         joystickBackground = GetComponent<Image>();
-        joystickHandle = transform.GetChild(0).GetComponent<Image>(); // °²³]¤â¬`¬O·n±ìª«¥óªº¤lª«¥ó
+        joystickHandle = transform.GetChild(0).GetComponent<Image>(); // ï¿½ï¿½ï¿½]ï¿½ï¿½`ï¿½Oï¿½nï¿½ìª«ï¿½óªº¤lï¿½ï¿½ï¿½ï¿½
     }
 
     public virtual void OnDrag(PointerEventData ped)
@@ -26,7 +26,7 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
             inputVector = new Vector3(pos.x * 2 - 1, 0, pos.y * 2 - 1);
             inputVector = (inputVector.magnitude > 1.0f) ? inputVector.normalized : inputVector;
 
-            // ²¾°Ê¤â¬`¦ì¸m
+            // ï¿½ï¿½ï¿½Ê¤ï¿½`ï¿½ï¿½m
             joystickHandle.rectTransform.anchoredPosition = new Vector3(inputVector.x * (joystickBackground.rectTransform.sizeDelta.x / 3),
                                                                         inputVector.z * (joystickBackground.rectTransform.sizeDelta.y / 3));
         }
@@ -40,7 +40,7 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
     public virtual void OnPointerUp(PointerEventData ped)
     {
         inputVector = Vector3.zero;
-        joystickHandle.rectTransform.anchoredPosition = Vector3.zero; // ±N¤â¬`Âk¦ì
+        joystickHandle.rectTransform.anchoredPosition = Vector3.zero; // ï¿½Nï¿½ï¿½`ï¿½kï¿½ï¿½
     }
 
     public float Horizontal()

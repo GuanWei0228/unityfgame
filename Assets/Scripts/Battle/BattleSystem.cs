@@ -192,7 +192,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    IEnumerator PerformPlayerMove()
+    IEnumerator PerformPlayerMove() //人物動作
     {
         state = BattleState.Busy;
 
@@ -244,7 +244,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    IEnumerator EnemyMove()
+    IEnumerator EnemyMove() //怪物動作
     {
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
         state = BattleState.EnemyMove;
@@ -253,12 +253,12 @@ public class BattleSystem : MonoBehaviour
         //yield return dialogBox.TypeDialog($"{playerUnit.Pokemon.Base.Name} used {move.Base.Name}");
         if (selectanswer == true)
         {
-            yield return dialogBox.TypeDialog($"答對！閃避怪物攻擊！");
+            yield return dialogBox.TypeDialog($"答對！閃避攻擊！");
             yield return new WaitForSeconds(1f);
         }
         else
         {
-            yield return dialogBox.TypeDialog($"答錯！怪物攻擊");
+            yield return dialogBox.TypeDialog($"答錯！{enemyUnit.Pokemon.Base.Name}攻擊");
             yield return new WaitForSeconds(1f);
         }
 

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 public class Pokemon : MonoBehaviour
 {
 
-    DatabaseReference reference;
+    //DatabaseReference reference;
 
     public PokemonBase Base { get; set; }
     public int Level { get; set; }
@@ -68,12 +68,13 @@ public class Pokemon : MonoBehaviour
 
     public bool EnemyTakeDamage(Move move, Pokemon attacker)
     {
-        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        print("怪物最大血量"+MaxHp);
+        //DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
         float modifiers = Random.Range(0.85f, 1f);
         float a = (2 * attacker.Level + 10) / 250f;
         float d =  a * move.Base.Power * ((float)attacker.Attack / Defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
-        print(damage);
+        
 
         BattleSystem battleSystem = FindObjectOfType<BattleSystem>();
         bool answer = battleSystem.selectanswer;
@@ -81,6 +82,8 @@ public class Pokemon : MonoBehaviour
         if (answer)
         {
             HP -= damage;
+            print("Ememy受傷" + damage);
+            print("Ememy血量"+HP);
         }
 
         if (HP <= 0)
@@ -98,22 +101,26 @@ public class Pokemon : MonoBehaviour
 
     public bool MeTakeDamage(Move move, Pokemon attacker)
     {
-
+        print("人物最大血量" + MaxHp);
         float modifiers = Random.Range(0.85f, 1f);
         float a = (2 * attacker.Level + 10) / 250f;
         float d = a * move.Base.Power * ((float)attacker.Attack / Defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
-        print(damage);
+        
         BattleSystem battleSystem = FindObjectOfType<BattleSystem>();
         bool answer = battleSystem.selectanswer;
 
         if (answer)
         {
             HP -= 0;
+            print("me受傷" + damage);
+            print("me血量" + HP);
         }
         else
         {
             HP -= damage;
+            print("me受傷" + damage);
+            print("me血量" + HP);
         }
         if (HP <= 0)
         {
