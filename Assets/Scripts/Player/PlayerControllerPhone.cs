@@ -19,7 +19,7 @@ public class PlayerControllerPhone : MonoBehaviour
 
     void Update()
     {
-        movement.x = MathF.Sign(joystick.Horizontal());
+        movement.x = (joystick.Horizontal());
         movement.y = joystick.Vertical();
         //movement = getAxis
         //print(movement.x);
