@@ -44,7 +44,6 @@ public class BattleDialogBox : MonoBehaviour
         dialogText.text = dialog;   
     }
 
-    
     public IEnumerator TypeDialog(string dialog)
     {
         dialogText.text = "";
@@ -127,6 +126,7 @@ public class BattleDialogBox : MonoBehaviour
 
     public void SetMoveNames(List<Move> moves)
     {
+        string level = PlayerPrefs.GetString("PlayerName", "DefaultName");
         reference = FirebaseDatabase.DefaultInstance.RootReference;
         BattleSystem battleSystem = FindObjectOfType<BattleSystem>();
         string rann = battleSystem.rann;
@@ -136,7 +136,7 @@ public class BattleDialogBox : MonoBehaviour
         {
             int currentIndex = i;
             if (i < 1) {
-                reference.Child("QAQ").Child("A").Child(rann).Child("1").GetValueAsync().ContinueWithOnMainThread(task => {
+                reference.Child(level).Child("A").Child(rann).Child("1").GetValueAsync().ContinueWithOnMainThread(task => {
                     if (task.IsFaulted)
                     {
                         print("00000");
@@ -156,7 +156,7 @@ public class BattleDialogBox : MonoBehaviour
             }
             else if (i < 2)
             {
-                reference.Child("QAQ").Child("A").Child(rann).Child("2").GetValueAsync().ContinueWithOnMainThread(task => {
+                reference.Child(level).Child("A").Child(rann).Child("2").GetValueAsync().ContinueWithOnMainThread(task => {
                     if (task.IsFaulted)
                     {
                         print("00000");
@@ -175,7 +175,7 @@ public class BattleDialogBox : MonoBehaviour
             }
             else if (i < 3)
             {
-                reference.Child("QAQ").Child("A").Child(rann).Child("3").GetValueAsync().ContinueWithOnMainThread(task => {
+                reference.Child(level).Child("A").Child(rann).Child("3").GetValueAsync().ContinueWithOnMainThread(task => {
                     if (task.IsFaulted)
                     {
                         print("00000");
@@ -194,7 +194,7 @@ public class BattleDialogBox : MonoBehaviour
             }
             else
             {
-                reference.Child("QAQ").Child("A").Child(rann).Child("4").GetValueAsync().ContinueWithOnMainThread(task => {
+                reference.Child(level).Child("A").Child(rann).Child("4").GetValueAsync().ContinueWithOnMainThread(task => {
                     if (task.IsFaulted)
                     {
                         print("00000");

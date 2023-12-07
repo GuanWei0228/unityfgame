@@ -1407,6 +1407,7 @@ MonoBehaviour:
   LoseMenu: {fileID: 300361392}
   logMenu: {fileID: 820109015}
   HealthPoint: {fileID: 292969733}
+  LevelMenu: {fileID: 0}
   minimap: {fileID: 1558876145}
   questionTextUI: {fileID: 902983390}
   answerTextUI: {fileID: 1726445154}
@@ -7375,7 +7376,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 69.482056, y: 25.68335}
+  m_AnchoredPosition: {x: 69.48187, y: 25.68335}
   m_SizeDelta: {x: 264.7467, y: 264.7467}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1555083872
@@ -10283,7 +10284,7 @@ MonoBehaviour:
   dialogBox: {fileID: 2048021495}
   questionTextUI: {fileID: 0}
   answerTextUI: {fileID: 0}
-  maxnumber: 100
+  maxnumber: 50
   rann: 1
   sel: 0
   answer: 

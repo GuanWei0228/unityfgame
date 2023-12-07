@@ -13,6 +13,7 @@ public class Menu : MonoBehaviour
     public GameObject LoseMenu;
     public GameObject logMenu;
     public GameObject HealthPoint;
+    public GameObject LevelMenu;
     public Canvas minimap;
     public Text questionTextUI;
     public Text answerTextUI;
@@ -22,8 +23,24 @@ public class Menu : MonoBehaviour
 
     public void PlayGame() 
     {
-        SceneManager.LoadScene("MainSampleScene");
+        LevelMenu.SetActive(true);
+        //SceneManager.LoadScene("MainSampleScene");
         Time.timeScale = 1.0f;
+    }
+    public void ChooseEasy()
+    {
+        PlayerPrefs.SetString("PlayerName", "Easy");
+        SceneManager.LoadScene("MainSampleScene");
+    }
+    public void ChooseMedium()
+    {
+        PlayerPrefs.SetString("PlayerName", "Medium");
+        SceneManager.LoadScene("MainSampleScene");
+    }
+    public void ChooseHard()
+    {
+        PlayerPrefs.SetString("PlayerName", "Hard");
+        SceneManager.LoadScene("MainSampleScene");
     }
     public void ReStart()
     {

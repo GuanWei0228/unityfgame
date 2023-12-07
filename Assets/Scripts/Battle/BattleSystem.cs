@@ -89,13 +89,14 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerAction()
     {
+        string level = PlayerPrefs.GetString("PlayerName", "DefaultName");
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
         //rann = UnityEngine.Random.Range(1, 5).ToString();
         state = BattleState.PlayerAction;
 
         //dialogBox.TypeDialog("");
 
-        reference.Child("QAQ").Child("Ans").Child(rann).GetValueAsync().ContinueWithOnMainThread(task => {
+        reference.Child(level).Child("Ans").Child(rann).GetValueAsync().ContinueWithOnMainThread(task => {
             if (task.IsFaulted)
             {
                 // Handle the error...
@@ -107,7 +108,7 @@ public class BattleSystem : MonoBehaviour
             }
         });
 
-        reference.Child("QAQ").Child("Q").Child(rann).GetValueAsync().ContinueWithOnMainThread(task => {
+        reference.Child(level).Child("Q").Child(rann).GetValueAsync().ContinueWithOnMainThread(task => {
             if (task.IsFaulted)
             {
                 // Handle the error...
