@@ -15,12 +15,22 @@ public class FirebaseManager : MonoBehaviour
     public Firebase.Auth.FirebaseAuth auth;
     public Firebase.Auth.FirebaseUser user;
 
-    
 
+
+    public int rCheck;
+    public int lCheck;
     void Start()
     {
         auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
-        auth.StateChanged += AuthStateChanged;
+        if (auth == null)
+        {
+            Debug.LogError("Firebase auth is not initialized properly.");
+        }
+        else
+        {
+            auth.StateChanged += AuthStateChanged;
+        }
+
     }
 
     // Update is called once per frame
@@ -35,7 +45,8 @@ public class FirebaseManager : MonoBehaviour
             if (task.IsFaulted)
             {
                 print(task.Exception.InnerException.Message);
-                return;
+                rCheck = 1;
+                return ;
             }
             if (task.IsCanceled)
             {
@@ -43,6 +54,7 @@ public class FirebaseManager : MonoBehaviour
             }
             if (task.IsCompletedSuccessfully)
             {
+                rCheck = 2;
                 print("Registered");
             }
         });
@@ -53,9 +65,11 @@ public class FirebaseManager : MonoBehaviour
         {
             if (task.IsFaulted){
                 print(task.Exception.InnerException.Message);
+                lCheck = 1;
                 return;
             }
             if(task.IsCompletedSuccessfully) {
+                lCheck = 2;
                 print("Login!!");
             }
         });
