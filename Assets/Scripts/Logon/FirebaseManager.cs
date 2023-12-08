@@ -12,6 +12,7 @@ using static UnityEngine.UIElements.UxmlAttributeDescription;
 public class FirebaseManager : MonoBehaviour
 {
     // Start is called before the first frame update
+
     public Firebase.Auth.FirebaseAuth auth;
     public Firebase.Auth.FirebaseUser user;
 
@@ -19,6 +20,9 @@ public class FirebaseManager : MonoBehaviour
 
     public int rCheck;
     public int lCheck;
+    public string snap = "";
+    public string Qsn = "";
+    public string Ans = "";
     void Start()
     {
         auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
@@ -36,7 +40,9 @@ public class FirebaseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        LoadData();
+        LoadAns();
+        LoadQsn();
     }
 
     public void Register(string email, string password) {
@@ -91,7 +97,7 @@ public class FirebaseManager : MonoBehaviour
         if (user != null)
         {
             DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-            reference.Child("QAQ").Child("Q").Child("1").SetValueAsync(data).ContinueWith(task =>
+            reference.Child(user.UserId).Child("Note").Child("MyNote").SetValueAsync(data).ContinueWith(task =>
             {
                 if (task.IsCompletedSuccessfully)
                 {
@@ -141,6 +147,48 @@ public class FirebaseManager : MonoBehaviour
             print("No user!");
         }
         
+    }
+
+    public void SaveQ(string data)
+    {
+        if (user != null)
+        {
+            DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+            reference.Child(user.UserId).Child("Note").Child("QsnNote").Child("Qsn").SetValueAsync(data).ContinueWith(task =>
+            {
+                if (task.IsCompletedSuccessfully)
+                {
+                    print("saved!");
+                }
+            });
+            
+        }
+        else
+        {
+            print("No user!");
+        }
+
+    }
+
+    public void SaveA(string data)
+    {
+        if (user != null)
+        {
+            DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+            reference.Child(user.UserId).Child("Note").Child("QsnNote").Child("Ans").SetValueAsync(data).ContinueWith(task =>
+            {
+                if (task.IsCompletedSuccessfully)
+                {
+                    print("saved!");
+                }
+            });
+
+        }
+        else
+        {
+            print("No user!");
+        }
+
     }
 
     public void SaveAnswer(string data)
@@ -202,15 +250,103 @@ public class FirebaseManager : MonoBehaviour
     public void LoadData() {
         if (user != null)
         {
-            //DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-            //reference.Child(user.UserId).Child("data").GetValueAsync().ContinueWith(task =>
-            //{
-            //   DataSnapshot snapshot = task.Result;
-            //    print(snapshot.Value);
-            //    //inputNote.text = snapshot.Value.ToString();
-            //});
+            StartCoroutine(LoadDataCoroutine());
 
-            GetUserReference().Child("logs").GetValueAsync().ContinueWith(task =>{
+            
+        }
+        else {
+            print("No user.");
+        }
+
+    }
+
+    public void LoadQsn()
+    {
+        if (user != null)
+        {
+            StartCoroutine(LoadQsnCoroutine());
+
+
+        }
+        else
+        {
+            print("No user.");
+        }
+
+    }
+
+    public void LoadAns()
+    {
+        if (user != null)
+        {
+            StartCoroutine(LoadAnsCoroutine());
+
+
+        }
+        else
+        {
+            print("No user.");
+        }
+
+    }
+
+    private IEnumerator LoadDataCoroutine()
+    {
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        var task = reference.Child(user.UserId).Child("Note").Child("MyNote").GetValueAsync();
+
+        yield return new WaitUntil(() => task.IsCompleted);
+
+        if (task.Exception != null)
+        {
+            print(task.Exception);
+            yield break;
+        }
+
+        DataSnapshot snapshot = task.Result;
+        snap = snapshot.Value.ToString();
+        //inputNote.text = snapshot.Value.ToString();
+    }
+
+    private IEnumerator LoadQsnCoroutine()
+    {
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        var task = reference.Child(user.UserId).Child("Note").Child("QsnNote").Child("Qsn").GetValueAsync();
+
+        yield return new WaitUntil(() => task.IsCompleted);
+
+        if (task.Exception != null)
+        {
+            print(task.Exception);
+            yield break;
+        }
+
+        DataSnapshot snapshot = task.Result;
+        Qsn = snapshot.Value.ToString();
+        //inputNote.text = snapshot.Value.ToString();
+    }
+
+    private IEnumerator LoadAnsCoroutine()
+    {
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        var task = reference.Child(user.UserId).Child("Note").Child("QsnNote").Child("Ans").GetValueAsync();
+
+        yield return new WaitUntil(() => task.IsCompleted);
+
+        if (task.Exception != null)
+        {
+            print(task.Exception);
+            yield break;
+        }
+
+        DataSnapshot snapshot = task.Result;
+        Ans = snapshot.Value.ToString();
+        //inputNote.text = snapshot.Value.ToString();
+    }
+
+
+
+    /*GetUserReference().Child("logs").GetValueAsync().ContinueWith(task =>{
                 if (task.IsCompletedSuccessfully)
                 {
                     DataSnapshot snapshot = task.Result;
@@ -224,13 +360,7 @@ public class FirebaseManager : MonoBehaviour
                         print($"{record.datetime} - {record.score}");
                     }
                 }
-            });
-        }
-        else {
-            print("No user.");
-        }
-
-    }
+            });*/
 
     public DatabaseReference GetUserReference() {
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
@@ -256,6 +386,8 @@ public class FirebaseManager : MonoBehaviour
         });
     }
 }
+
+
 
 public class GameRecord {
     public string datetime;
