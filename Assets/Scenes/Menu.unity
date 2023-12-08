@@ -1223,7 +1223,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Password
+  m_Text: Password/at least 6 words
 --- !u!222 &691926467
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4066,7 +4066,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8A3B\u518A\u5931\u6557\uFF0C\u6B64\u5E33\u865F\u5DF2\u6709\u4EBA\u8A3B\u518A\uFF01"
+  m_Text: "\u5931\u6557\uFF01\u683C\u5F0F\u932F\u8AA4\u6216\u6B64\u5E33\u865F\u5DF2\u6709\u4EBA\u8A3B\u518A\uFF01"
 --- !u!222 &2037474412
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -206,7 +206,7 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            yield return dialogBox.TypeDialog($"答錯了哭哭！");
+            yield return dialogBox.TypeDialog($"答錯了！");
             yield return new WaitForSeconds(1f);
         }
         yield return new WaitForSeconds(1f);
@@ -254,13 +254,12 @@ public class BattleSystem : MonoBehaviour
         //yield return dialogBox.TypeDialog($"{playerUnit.Pokemon.Base.Name} used {move.Base.Name}");
         if (selectanswer == true)
         {
-            yield return dialogBox.TypeDialog($"答對！閃避攻擊！");
-            yield return new WaitForSeconds(1f);
+            
         }
         else
         {
-            yield return dialogBox.TypeDialog($"答錯！{enemyUnit.Pokemon.Base.Name}攻擊");
-            yield return new WaitForSeconds(1f);
+            //yield return dialogBox.TypeDialog($"答錯！{enemyUnit.Pokemon.Base.Name}攻擊");
+            //yield return new WaitForSeconds(1f);
         }
 
         bool isFainted = playerUnit.Pokemon.MeTakeDamage(move, playerUnit.Pokemon);
@@ -279,8 +278,8 @@ public class BattleSystem : MonoBehaviour
         }
         else if(isFainted == false && player.Monstertag == "Monster")
         {
-            yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name}沒死亡，換一個題目！");
-            yield return new WaitForSeconds(1.5f);
+            //yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name}沒死亡，換一個題目！");
+            //yield return new WaitForSeconds(0.8f);
             GetRann();
             dialogBox.SetMoveNames(playerUnit.Pokemon.Moves);
 
@@ -301,8 +300,8 @@ public class BattleSystem : MonoBehaviour
         }
         else if (isFainted == false && player.Monstertag == "Boss")
         {
-            yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name}沒死亡，換一個題目！");
-            yield return new WaitForSeconds(2f);
+            //yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name}沒死亡，換一個題目！");
+            //yield return new WaitForSeconds(2f);
             GetRann();
             dialogBox.SetMoveNames(playerUnit.Pokemon.Moves);
 

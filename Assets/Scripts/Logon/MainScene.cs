@@ -65,11 +65,9 @@ public class MainScene : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T)) {
             firebaseManager.TestSecurityRule();
         }
-    }
 
-    public void Register() {
-        firebaseManager.Register(inputEmail.text, inputPassword.text);
-        if (firebaseManager.rCheck == 1) {
+        if (firebaseManager.rCheck == 1)
+        {
             loginFail.SetActive(false);
             registerFail.SetActive(true);
             registerSuccess.SetActive(false);
@@ -82,12 +80,8 @@ public class MainScene : MonoBehaviour
             registerSuccess.SetActive(true);
             firebaseManager.rCheck = 0;
         }
-    }
 
-    public void Login() { 
-        firebaseManager.Login(inputEmail.text, inputPassword.text);
-
-        if (firebaseManager.lCheck == 0)
+        if (firebaseManager.lCheck == 1)
         {
             loginFail.SetActive(true);
             registerFail.SetActive(false);
@@ -101,6 +95,15 @@ public class MainScene : MonoBehaviour
             registerSuccess.SetActive(false);
             firebaseManager.lCheck = 0;
         }
+    }
+
+    public void Register() {
+        firebaseManager.Register(inputEmail.text, inputPassword.text);
+        
+    }
+
+    public void Login() { 
+        firebaseManager.Login(inputEmail.text, inputPassword.text);
     }
 
     public void Logout()
