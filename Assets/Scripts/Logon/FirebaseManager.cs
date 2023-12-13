@@ -25,6 +25,7 @@ public class FirebaseManager : MonoBehaviour
     public string snap = "";
     public string Qsn = "";
     public string Ans = "";
+
     void Start()
     {
         auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
@@ -45,7 +46,7 @@ public class FirebaseManager : MonoBehaviour
         LoadData();
         LoadAns();
         LoadQsn();
-        
+
     }
 
     public void Register(string email, string password) {
@@ -107,44 +108,6 @@ public class FirebaseManager : MonoBehaviour
                     print("saved!");
                 }
             });
-            //reference.Child("Users").Child(user.UserId).Child("note").SetValueAsync(data).ContinueWith(task => {
-            //    if (task.IsCompletedSuccessfully)
-            //    {
-            //        print("saved!");
-            //    }
-            //});
-            // UUID
-            //reference.Child(user.UserId).Child("my_list").Push().SetValueAsync(ServerValue.Timestamp).ContinueWith(task => {
-            //    if (task.IsCompletedSuccessfully)
-            //    {
-            //        print("saved!");
-            //    }
-            //});
-
-            // JSON
-            //var score = UnityEngine.Random.Range(0, 101);
-            //var record = new GameRecord(score);
-            //var jsonRecord = JsonUtility.ToJson(record);
-            //GetUserReference().Child("logs").Push().SetRawJsonValueAsync(jsonRecord).ContinueWith(task =>
-            //{
-            //    if (task.IsCompletedSuccessfully)
-            //    {
-            //        print($"saved - {score}");
-            //    }
-            //});
-
-            //GetUserReference().Child("note").SetValueAsync(data).ContinueWith(task =>
-            //{
-            //    if (task.IsCompletedSuccessfully)
-            //    {
-            //        print("saved");
-            //    }
-            //   if (task.IsFaulted)
-            //    {
-            //        print(task.Exception);
-            //        return;
-            //    }
-            //});
         }
         else {
             print("No user!");
@@ -209,39 +172,6 @@ public class FirebaseManager : MonoBehaviour
                     print("QQ");
                 }
             });
-
-            // UUID
-            //reference.Child(user.UserId).Child("my_list").Push().SetValueAsync(ServerValue.Timestamp).ContinueWith(task => {
-            //    if (task.IsCompletedSuccessfully)
-            //    {
-            //        print("saved!");
-            //    }
-            //});
-
-            // JSON
-            //var score = UnityEngine.Random.Range(0, 101);
-            //var record = new GameRecord(score);
-            //var jsonRecord = JsonUtility.ToJson(record);
-            //GetUserReference().Child("logs").Push().SetRawJsonValueAsync(jsonRecord).ContinueWith(task =>
-            //{
-            //    if (task.IsCompletedSuccessfully)
-            //    {
-            //        print($"saved - {score}");
-            //    }
-            //});
-
-            //GetUserReference().Child("note").SetValueAsync(data).ContinueWith(task =>
-            //{
-            //    if (task.IsCompletedSuccessfully)
-            //    {
-            //        print("saved");
-            //    }
-            //   if (task.IsFaulted)
-            //    {
-            //        print(task.Exception);
-            //        return;
-            //    }
-            //});
         }
         else
         {
@@ -348,23 +278,6 @@ public class FirebaseManager : MonoBehaviour
     }
 
 
-
-    /*GetUserReference().Child("logs").GetValueAsync().ContinueWith(task =>{
-                if (task.IsCompletedSuccessfully)
-                {
-                    DataSnapshot snapshot = task.Result;
-                    print(snapshot.Value);
-                    //foreach (var data in snapshot.Value as Dictionary<string, object>) {
-                    //    print($"{data.Key} | {data.Value}");
-                    //}
-                    foreach (var data in snapshot.Children) {
-                        var jsonRecord = data.GetRawJsonValue();
-                        var record = JsonUtility.FromJson<GameRecord>(jsonRecord);
-                        print($"{record.datetime} - {record.score}");
-                    }
-                }
-            });*/
-
     public DatabaseReference GetUserReference() {
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
         return reference.Child("Users").Child(user.UserId);
@@ -377,7 +290,7 @@ public class FirebaseManager : MonoBehaviour
     public void TestSecurityRule()
     {
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-        reference.Child("Users/tf0wZYfQmVTvqjtpzeHBDWsjE0J3/note").SetValueAsync("uimm­×§ï").ContinueWith(task => {
+        reference.Child("Users/tf0wZYfQmVTvqjtpzeHBDWsjE0J3/note").SetValueAsync("uimmï¿½×§ï¿½").ContinueWith(task => {
             if (task.IsCompletedSuccessfully) {
                 print("OK");
             }
