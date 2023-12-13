@@ -90,6 +90,7 @@ public class BattleSystem : MonoBehaviour
     void PlayerAction()
     {
         string level = PlayerPrefs.GetString("PlayerName", "DefaultName");
+        print(level);
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
         //rann = UnityEngine.Random.Range(1, 5).ToString();
         state = BattleState.PlayerAction;

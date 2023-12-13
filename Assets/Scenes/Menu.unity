@@ -1396,6 +1396,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rCheck: 0
   lCheck: 0
+  snap: 
+  Qsn: 
+  Ans: 
 --- !u!4 &776179357
 Transform:
   m_ObjectHideFlags: 0
@@ -3041,15 +3044,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleSystem: {fileID: 0}
+  firebaseManager: {fileID: 0}
   pauseMenu: {fileID: 0}
   WinMenu: {fileID: 0}
   LoseMenu: {fileID: 0}
   logMenu: {fileID: 0}
+  noteMenu: {fileID: 0}
+  qsnNote: {fileID: 0}
+  note: {fileID: 0}
   HealthPoint: {fileID: 0}
   LevelMenu: {fileID: 871649128}
   minimap: {fileID: 0}
   questionTextUI: {fileID: 0}
   answerTextUI: {fileID: 0}
+  inputField: {fileID: 0}
+  QsnText: {fileID: 0}
 --- !u!1 &1645686197
 GameObject:
   m_ObjectHideFlags: 0
@@ -3136,7 +3145,7 @@ Transform:
   m_GameObject: {fileID: 1645686197}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 1034, y: 429, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

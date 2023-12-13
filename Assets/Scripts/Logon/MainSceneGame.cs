@@ -34,23 +34,6 @@ public class MainSceneGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            //firebaseManager.SaveData(inputNote.text);
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            //firebaseManager.SaveAnswer(inputNote.text);
-        }
-        //if (Input.GetKeyDown(KeyCode.Z))
-        //{
-        //    firebaseManager.LoadData(); 
-        //    //StartCoroutine(LoadNoteTask());
-        //}
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            firebaseManager.TestSecurityRule();
-        }
 
         if (firebaseManager.user == null)
         {

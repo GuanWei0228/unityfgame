@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b3f6957e43b55b4ab414e60a3960fe7, type: 3}
-  m_Name: IntellectDevourer
+  m_Name: Devourer
   m_EditorClassIdentifier: 
-  name: Intellect Devourer
+  name: Devourer
   description: 
   frontSprite: {fileID: -7866047666421470266, guid: 87babac28aeaa6f4f8b6e78156a6ee6a, type: 3}
   backSprite: {fileID: -7866047666421470266, guid: 87babac28aeaa6f4f8b6e78156a6ee6a, type: 3}

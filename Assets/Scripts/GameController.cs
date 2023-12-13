@@ -94,7 +94,7 @@ public class GameController : MonoBehaviour
         {
             battleSystem.HandleUpdate();
         }
-        if (life.playerHP == 0) 
+        if (life.playerHP <= 0) 
         {
             LoseGame();
             return;

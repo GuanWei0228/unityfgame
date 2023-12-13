@@ -2416,7 +2416,7 @@ MonoBehaviour:
   - {fileID: 5725438049252232791, guid: 243ae8cbde418fd4ab701a2136b7f41e, type: 3}
   - {fileID: 3662976535099473530, guid: 85880a2ea63443142b595e4eceb29eb3, type: 3}
   spawnPoint: {fileID: 4870281072760598328}
-  yourMaxValue: 2
+  yourMaxValue: 3
 --- !u!1 &4929789701845472523
 GameObject:
   m_ObjectHideFlags: 0

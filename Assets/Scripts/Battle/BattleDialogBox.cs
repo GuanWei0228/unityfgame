@@ -38,6 +38,7 @@ public class BattleDialogBox : MonoBehaviour
 
     public event Action OnDialogComplete; // 定義一個事件
 
+    public string level;
 
     public void SetDialog(string dialog)
     {
@@ -214,18 +215,6 @@ public class BattleDialogBox : MonoBehaviour
             }
         }
         
-
-        /*for (int i = 0; i < moveTexts.Count; ++i)
-        {
-            if (i < 1)
-                moveTexts[i].text = "A.solitary";
-            else if (i < 2)
-                moveTexts[i].text = "B.symphony";
-            else if (i < 3)
-                moveTexts[i].text = "C.slump";
-            else
-                moveTexts[i].text = "D.knack";
-        }*/
     }
 
     

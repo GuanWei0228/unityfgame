@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,26 +13,27 @@ public class Room : MonoBehaviour
     public Text textnumber;
     public int stepToStart;//距离初始点的网格距离
     public int doorNumber;
+
     private bool playerEntered = false; // 用于追踪玩家是否进入房间
+    private float yourRadius = 1f;
+
     void Start()
     {
-
-
-        //对应方向的门是否显示，关联对应方向是否有其他房间
-        //doorLeft.SetActive(roomLeft);
-        //doorRight.SetActive(roomRight);
-        //doorUp.SetActive(roomUp);
-        //doorDown.SetActive(roomDown);
     }
+
     void Update()
     {
-        // 如果玩家进入房间，打开门
+
+        // 如果玩家进入房间
         if (playerEntered)
         {
-            doorLeft.SetActive(roomLeft);
-            doorRight.SetActive(roomRight);
-            doorUp.SetActive(roomUp);
-            doorDown.SetActive(roomDown);
+                //bool hasMonsters = HasMonsters();
+                //print(hasMonsters);
+                doorLeft.SetActive(roomLeft);
+                doorRight.SetActive(roomRight);
+                doorUp.SetActive(roomUp);
+                doorDown.SetActive(roomDown);
+
         }
         else
         {
@@ -45,6 +44,7 @@ public class Room : MonoBehaviour
             doorDown.SetActive(false);
         }
     }
+
     public void UpdateRoom(float xOffset, float yOffset)
     {
         //计算距离初始点的网格距离
@@ -63,14 +63,41 @@ public class Room : MonoBehaviour
             doorNumber++;
     }
 
+    // 检查房间内是否有怪物
+    private bool HasMonsters()
+    {
+        Collider2D roomCollider = GetComponent<Collider2D>();
+
+        if (roomCollider != null)
+        {
+            // 取得房間的大小
+            Vector2 roomSize = roomCollider.bounds.size;
+
+            // 設定矩形的中心為房間的位置，大小為房間的大小
+            Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, roomSize, 0f);
+
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider.CompareTag("Monster"))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+
     public void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             playerEntered = true;
             CamerController.instance.ChangeTarget(transform);
         }
     }
+
     public void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

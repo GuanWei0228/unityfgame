@@ -62,9 +62,6 @@ public class MainScene : MonoBehaviour
         //    firebaseManager.LoadData(); 
         //    //StartCoroutine(LoadNoteTask());
         //}
-        if (Input.GetKeyDown(KeyCode.T)) {
-            firebaseManager.TestSecurityRule();
-        }
 
         if (firebaseManager.rCheck == 1)
         {

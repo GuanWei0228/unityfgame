@@ -22,9 +22,9 @@ public class FirebaseManager : MonoBehaviour
 
     public int rCheck;
     public int lCheck;
-    public string snap = "";
-    public string Qsn = "";
-    public string Ans = "";
+    public string snap = "123";
+    public string Qsn = "123";
+    public string Ans = "123";
 
     void Start()
     {
@@ -54,7 +54,6 @@ public class FirebaseManager : MonoBehaviour
         {
             if (task.IsFaulted)
             {
-                print(task.Exception.InnerException.Message);
                 rCheck = 1;
                 return ;
             }
@@ -74,7 +73,6 @@ public class FirebaseManager : MonoBehaviour
         await auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
             if (task.IsFaulted){
-                print(task.Exception.InnerException.Message);
                 lCheck = 1;
                 return;
             }
@@ -106,11 +104,13 @@ public class FirebaseManager : MonoBehaviour
                 if (task.IsCompletedSuccessfully)
                 {
                     print("saved!");
+                    return;
                 }
             });
         }
         else {
             print("No user!");
+            return;
         }
         
     }
@@ -125,6 +125,7 @@ public class FirebaseManager : MonoBehaviour
                 if (task.IsCompletedSuccessfully)
                 {
                     print("saved!");
+                    return;
                 }
             });
             
@@ -132,6 +133,7 @@ public class FirebaseManager : MonoBehaviour
         else
         {
             print("No user!");
+            return;
         }
 
     }
@@ -146,6 +148,7 @@ public class FirebaseManager : MonoBehaviour
                 if (task.IsCompletedSuccessfully)
                 {
                     print("saved!");
+                    return;
                 }
             });
 
@@ -153,38 +156,17 @@ public class FirebaseManager : MonoBehaviour
         else
         {
             print("No user!");
+            return;
         }
 
     }
 
-    public void SaveAnswer(string data)
-    {
-        if (user != null)
-        {
-            DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-            reference.Child("QAQ").Child("Answer").Child("1").SetValueAsync(data).ContinueWith(task =>
-            {
-                if (task.IsCompletedSuccessfully)
-                {
-                    print("saved!");
-                }
-                else {
-                    print("QQ");
-                }
-            });
-        }
-        else
-        {
-            print("No user!");
-        }
-
-    }
 
     public void LoadData() {
         if (user != null)
         {
             StartCoroutine(LoadDataCoroutine());
-
+            
             
         }
         else {
@@ -198,7 +180,7 @@ public class FirebaseManager : MonoBehaviour
         if (user != null)
         {
             StartCoroutine(LoadQsnCoroutine());
-
+            
 
         }
         else
@@ -213,7 +195,7 @@ public class FirebaseManager : MonoBehaviour
         if (user != null)
         {
             StartCoroutine(LoadAnsCoroutine());
-
+            
 
         }
         else
@@ -287,20 +269,7 @@ public class FirebaseManager : MonoBehaviour
         auth.StateChanged -= AuthStateChanged;
     }
 
-    public void TestSecurityRule()
-    {
-        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-        reference.Child("Users/tf0wZYfQmVTvqjtpzeHBDWsjE0J3/note").SetValueAsync("uimm�ק�").ContinueWith(task => {
-            if (task.IsCompletedSuccessfully) {
-                print("OK");
-            }
-            if (task.IsFaulted)
-            {
-                print(task.Exception);
-                return;
-            }
-        });
-    }
+
 }
 
 
