@@ -202,12 +202,12 @@ public class BattleSystem : MonoBehaviour
         if (selectanswer == true)
         {
             yield return dialogBox.TypeDialog($"答對，進行攻擊！");
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.6f);
         }
         else
         {
             yield return dialogBox.TypeDialog($"答錯了！");
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.6f);
         }
         yield return new WaitForSeconds(1f);
         questionAnswerPairs.Add(new Tuple<string, string>(panelquestion, answer));

@@ -1,4 +1,4 @@
-using Firebase.Database;
+ï»¿using Firebase.Database;
 using Firebase.Extensions;
 using System;
 using System.Collections;
@@ -36,7 +36,7 @@ public class BattleDialogBox : MonoBehaviour
 
     public BattleSystem battleSystem;
 
-    public event Action OnDialogComplete; // ©w¸q¤@­Ó¨Æ¥ó
+    public event Action OnDialogComplete; // å®šç¾©ä¸€å€‹äº‹ä»¶
 
 
     public void SetDialog(string dialog)
@@ -53,7 +53,7 @@ public class BattleDialogBox : MonoBehaviour
         {
             dialogText.text += letter;
 
-            // ÀË¬d¬O§_¦³ÂIÀ»Ä²µo
+            // æª¢æŸ¥æ˜¯å¦æœ‰é»æ“Šè§¸ç™¼
             if (Input.GetMouseButtonDown(0))
             {
                 isClickTriggered = true;
@@ -63,7 +63,7 @@ public class BattleDialogBox : MonoBehaviour
             yield return new WaitForSeconds(1f / lettersPerSecond);
         }
 
-        // ¦pªGÂIÀ»Ä²µo¤F¡A°¨¤WÅã¥Ü¥ş³¡¤å¦r
+        // å¦‚æœé»æ“Šè§¸ç™¼äº†ï¼Œé¦¬ä¸Šé¡¯ç¤ºå…¨éƒ¨æ–‡å­—
         if (isClickTriggered)
         {
             dialogText.text = dialog;

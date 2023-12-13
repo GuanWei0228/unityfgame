@@ -16,6 +16,8 @@ public class FirebaseManager : MonoBehaviour
     public Firebase.Auth.FirebaseAuth auth;
     public Firebase.Auth.FirebaseUser user;
 
+    private float loadDataTimer = 0f;
+    private float loadDataInterval = 2f; // Adjust the interval as needed
 
 
     public int rCheck;
@@ -43,6 +45,7 @@ public class FirebaseManager : MonoBehaviour
         LoadData();
         LoadAns();
         LoadQsn();
+        
     }
 
     public void Register(string email, string password) {
